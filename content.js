@@ -54,9 +54,12 @@ window.CARD_CONTENT = {
   stickers: [
     { src: "assets/love-sticker.png", enabled: false },
     { src: "assets/girl-black.png" },
+    { src: "assets/sticker-cry.png" },
     { src: "assets/girl-light.png" },
+    { src: "assets/sticker-cap.png" },
     { src: "assets/boy-expressions.png", enabled: false, crop: [223,24,288,398,725,2170] },
     { src: "assets/girl-cheek.png" },
+    { src: "assets/sticker-surprise.png" },
     { src: "assets/girl-pink.png" },
     { src: "assets/boy-expressions.png", enabled: false, crop: [226,460,282,400,725,2170] },
     { src: "assets/boy-peace.png", enabled: false },
