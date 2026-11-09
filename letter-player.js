@@ -10,12 +10,26 @@
   let sentenceEntrance, outgoingSentence;
   const entries=[{text:content.greeting,at:content.greetingAt},...content.letterLines,{text:content.signoff,at:content.signoffAt},{text:content.signature,at:content.signatureAt}];
   let cues=timing.createCues(entries,start,end);
-  let stickerScene=-1;
+  let stickerScene=-1, stickerIndex=-2, stickerFade;
   const activeStickers=content.stickers.filter(sticker=>sticker.enabled!==false);
   function showSticker(index){
     const layer=$('sticker-layer');
-    layer.hidden=index<0||finished||!activeStickers.length;
-    if(layer.hidden)return;
+    if(index<0||finished||!activeStickers.length){
+      stickerFade?.cancel();layer.hidden=true;stickerIndex=-2;return;
+    }
+    if(index===stickerIndex)return;
+    const first=layer.hidden;
+    stickerIndex=index;layer.hidden=false;stickerFade?.cancel();
+    if(first||reducedMotion.matches){renderSticker(index);return;}
+    // Fade the whole image once per sentence; it never follows the typing effect.
+    stickerFade=layer.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-in',fill:'forwards'});
+    stickerFade.onfinish=()=>{
+      renderSticker(index);stickerFade.cancel();
+      stickerFade=layer.animate([{opacity:0},{opacity:1}],{duration:260,easing:'ease-out'});
+    };
+  }
+  function renderSticker(index){
+    const layer=$('sticker-layer');
     const scene=Math.floor(index/2);
     if(scene===stickerScene)return;
     stickerScene=scene;

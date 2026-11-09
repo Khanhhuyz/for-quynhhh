@@ -35,15 +35,15 @@ body{background:#faf3ed;color:#74495c}
 @media(max-height:600px){.current-sentence{font-size:clamp(30px,4.3vw,50px);line-height:1.25}.line-stage::before{top:3%;font-size:18px}.tap-hint{bottom:0;font-size:6px}.question-section h2{font-size:35px}}
 
 .sticker-layer{position:absolute;inset:0;pointer-events:none;z-index:2}
-.sentence-sticker{position:absolute;top:2%;left:6%;width:clamp(135px,15vw,195px);filter:drop-shadow(0 8px 10px #8354631c);animation:sticker-arrive .65s cubic-bezier(.2,.8,.3,1) both;--tilt:-11deg}
+.sentence-sticker{position:absolute;top:2%;left:6%;width:clamp(135px,15vw,195px);filter:drop-shadow(0 8px 10px #8354631c);transform:rotate(var(--tilt));--tilt:-11deg}
 .sticker-layer[data-side=right] .sentence-sticker{left:auto;right:6%;--tilt:10deg}
-.sticker-crop{position:relative;overflow:hidden;width:100%;animation:sticker-float 6s ease-in-out .7s infinite alternate}
+.sticker-crop{position:relative;overflow:hidden;width:100%;}
 .sticker-crop>img{display:block;width:100%;max-height:220px;object-fit:contain}
 .sticker-crop[style]>img{max-height:none;object-fit:fill}
 .sticker-hearts{position:absolute;right:6%;bottom:12%;font:34px var(--serif);color:#bd8da0;opacity:.55;transform:rotate(14deg)}
 .sticker-layer[data-side=right] .sticker-hearts{right:auto;left:5%;transform:rotate(-15deg)}
-@keyframes sticker-arrive{from{opacity:0;transform:translateY(18px) rotate(0deg) scale(.85)}to{opacity:1;transform:translateY(0) rotate(var(--tilt)) scale(1)}}
-@keyframes sticker-float{from{translate:0 0}to{translate:0 -7px}}
+
+
 @media(max-width:760px){.sentence-sticker{width:103px;top:1%;left:5%;--tilt:-9deg}.sticker-layer[data-side=right] .sentence-sticker{right:5%}.sticker-crop>img{max-height:125px}.sticker-crop[style]{max-height:125px}.sticker-crop[style]>img{max-height:none}.sticker-hearts{font-size:23px;bottom:11%;right:3%}}
 @media(max-height:600px){.sentence-sticker{width:85px;top:0;left:3%}.sticker-layer[data-side=right] .sentence-sticker{right:3%}.sticker-crop>img{max-height:85px}.sticker-crop[style]{max-height:85px}.sticker-hearts{font-size:20px;bottom:8%}}
 @media(prefers-reduced-motion:reduce){.sentence-sticker{animation:none!important;transform:rotate(var(--tilt))}.sticker-crop{animation:none!important}}

@@ -50,3 +50,6 @@ Hiệu ứng nhập chữ dùng thời gian phát nhạc: tạm dừng sẽ dừ
 
 Chuyển câu: câu cũ mờ dần và trôi lên trong 380 ms; câu mới hiện mềm từ phía dưới trong 680 ms, đồng thời gõ từng ký tự. Chạm liên tục hủy lớp chuyển cũ để tránh chồng nhiều câu. Chế độ giảm chuyển động bỏ hiệu ứng này.
 
+
+Sticker hiện nguyên hình, đứng yên; mỗi lần chuyển câu chỉ mờ đi trong 180 ms rồi hiện lại trong 260 ms, độc lập với hiệu ứng gõ chữ. Ảnh vẫn thay sau mỗi hai câu.
+
