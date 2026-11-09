@@ -8,6 +8,7 @@
   content.letterLines.forEach(line=>{const p=document.createElement('p');p.textContent=line.text;$('full-letter').append(p);});
   content.question.split(/<br\s*\/?>/i).forEach((line,i)=>{if(i)$('question-title').append(document.createElement('br'));$('question-title').append(document.createTextNode(line));});
   $('question-description').textContent=content.questionDescription;
+  $('question-description').hidden=!content.questionDescription;
   $('answer-yes').firstChild.textContent=content.yesLabel+' ';
   $('answer-later').textContent=content.laterLabel;
   $('answer-yes').addEventListener('click',()=>{

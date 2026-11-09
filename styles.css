@@ -85,6 +85,9 @@ body{background:#faf3ed;color:#74495c}
 .asset-status{min-height:22px;margin-top:12px;font-size:10px;line-height:1.8;color:#ad8d99}
 .button:disabled{cursor:wait;opacity:.72;transform:none}
 .current-sentence.grouped-sentence{white-space:pre-line;font-size:clamp(28px,3.5vw,48px);line-height:1.35}
+.question-section h2{font-size:clamp(32px,4vw,55px);line-height:1.3}
+@media(max-width:760px){.question-section h2{font-size:clamp(26px,7vw,36px);letter-spacing:-.4px}}
+@media(max-height:600px){.question-section h2{font-size:clamp(23px,3.5vw,34px)}}
 #full-letter p{white-space:pre-line}
 @media(max-width:760px){.current-sentence.grouped-sentence{font-size:clamp(21px,5.6vw,29px);line-height:1.4;top:48%}}
 @media(max-height:600px){.current-sentence.grouped-sentence{font-size:clamp(18px,3vw,28px);line-height:1.25}}
