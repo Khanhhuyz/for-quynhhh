@@ -12,7 +12,7 @@ window.CARD_CONTENT = {
   questionDescription: "",
   yesLabel: "Quỳnh đồng íiii",
   laterLabel: "Quỳnh hong chịuu",
-  yesMessage: "Vậy mình cùng tạo thêm thật nhiều kỷ niệm đẹp nhé. Thương em! ♡",
+  yesMessage: "Aaa thế là đông năm nay vẫn lạnh nma lạnh cùng nhau nhée, iuu Quỳnhhh",
   laterMessage: "Em cứ dành thời gian cho mình nhé. Cảm ơn em đã đọc hết những lời anh muốn nói. ♡",
   music: {
     src: "assets/vien-da-nho-from-41.m4a",
