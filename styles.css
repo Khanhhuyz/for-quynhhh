@@ -84,6 +84,15 @@ body{background:#faf3ed;color:#74495c}
 .sticker-layer[data-stroll=true] .story-actor{width:calc(clamp(90px,12vw,140px)*var(--actor-scale,1))}
 .asset-status{min-height:22px;margin-top:12px;font-size:10px;line-height:1.8;color:#ad8d99}
 .button:disabled{cursor:wait;opacity:.72;transform:none}
+.answer-runaway{position:absolute;z-index:6;white-space:nowrap;box-shadow:0 5px 18px #aa63781a}
+.answer-invitation{position:relative;isolation:isolate}
+.answer-invitation #answer-yes{position:relative;z-index:2;min-height:64px;padding:17px 34px;font-size:18px;box-shadow:0 0 0 7px #f5dce550,0 8px 35px #aa637838;animation:invitation-pop .65s cubic-bezier(.2,.8,.3,1.3) both}
+.answer-effects{position:absolute;left:50%;top:50%;width:min(620px,88vw);height:230px;transform:translate(-50%,-50%);pointer-events:none;z-index:-1}
+.agree-whisper{position:absolute;transform:translate(-50%,-50%) rotate(var(--angle));font:italic 500 clamp(20px,3vw,29px)/1.2 var(--serif);white-space:nowrap;color:#b47991;opacity:.35}
+.answer-sparkle{position:absolute;transform:translate(-50%,-50%);font-size:23px;line-height:1;color:#c78b9b;animation:answer-twinkle 1.9s ease-in-out infinite alternate}
+@keyframes answer-twinkle{from{opacity:.22;scale:.65}to{opacity:.95;scale:1.2}}
+@keyframes invitation-pop{from{opacity:.4;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@media(max-width:760px){.answer-invitation #answer-yes{font-size:16px;min-height:58px;padding:14px 25px}.answer-effects{height:190px}.agree-whisper{font-size:21px}.answer-sparkle{font-size:18px}}
 .current-sentence.grouped-sentence{white-space:pre-line;font-size:clamp(28px,3.5vw,48px);line-height:1.35}
 .question-section h2{font-size:clamp(32px,4vw,55px);line-height:1.3}
 @media(max-width:760px){.question-section h2{font-size:clamp(26px,7vw,36px);letter-spacing:-.4px}}

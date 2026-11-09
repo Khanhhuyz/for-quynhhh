@@ -10,8 +10,8 @@ window.CARD_CONTENT = {
   signatureAt: 162,
   question: "Cho anh cơ hội được nghiêm túc tìm hiểu em, cho anh được yêu thương và che chở cho cô gái nhỏ này, em nhé?",
   questionDescription: "",
-  yesLabel: "Em đồng ý",
-  laterLabel: "Để em nghĩ thêm nhé",
+  yesLabel: "Quỳnh đồng íiii",
+  laterLabel: "Quỳnh hong chịuu",
   yesMessage: "Vậy mình cùng tạo thêm thật nhiều kỷ niệm đẹp nhé. Thương em! ♡",
   laterMessage: "Em cứ dành thời gian cho mình nhé. Cảm ơn em đã đọc hết những lời anh muốn nói. ♡",
   music: {
