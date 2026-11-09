@@ -7,6 +7,7 @@
   let end=song.durationSeconds, opened=false, started=false, finished=false;
   let loading=false, failed=false, frame, lastIndex=-2, manualFloor=-1;
   let typedCharacters=[], typedCount=0, typingStart=0, typingDuration=1;
+  let sentenceEntrance, outgoingSentence;
   const entries=[{text:content.greeting,at:content.greetingAt},...content.letterLines,{text:content.signoff,at:content.signoffAt},{text:content.signature,at:content.signatureAt}];
   let cues=timing.createCues(entries,start,end);
   let stickerScene=-1;
@@ -52,11 +53,33 @@
     $('question').hidden=!show;$('line-stage').hidden=show;
     $('chapter-badge').textContent=show?'MỘT CÂU HỎI':'LỜI THƯƠNG';
   }
+  function transitionSentence(index){
+    const sentence=$('current-sentence');
+    sentenceEntrance?.cancel();
+    outgoingSentence?.remove();outgoingSentence=null;
+    if(reducedMotion.matches||index<0||finished)return;
+    if(lastIndex>=0&&typedCount>0){
+      const outgoing=sentence.cloneNode(true);
+      outgoing.removeAttribute('id');outgoing.removeAttribute('aria-live');outgoing.removeAttribute('aria-atomic');
+      outgoing.setAttribute('aria-hidden','true');outgoing.classList.add('sentence-outgoing');
+      sentence.after(outgoing);outgoingSentence=outgoing;
+      const departure=outgoing.animate([
+        {opacity:1,translate:'0 0',filter:'blur(0)'},
+        {opacity:0,translate:'0 -18px',filter:'blur(3px)'}
+      ],{duration:380,easing:'cubic-bezier(.4,0,.6,1)',fill:'forwards'});
+      departure.onfinish=()=>{outgoing.remove();if(outgoingSentence===outgoing)outgoingSentence=null;};
+    }
+    sentenceEntrance=sentence.animate([
+      {opacity:0,translate:'0 15px',filter:'blur(2px)'},
+      {opacity:1,translate:'0 0',filter:'blur(0)'}
+    ],{duration:680,delay:lastIndex>=0?140:0,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'});
+  }
   function paint(){
     const time=audio.currentTime||start;
     const state=timing.snapshot(cues,time,start,end);
     const index=started?Math.max(state.visible-1,manualFloor):-1;
     if(index!==lastIndex){
+      transitionSentence(index);
       lastIndex=index;
       const text=entries[index]?.text||'Một giai điệu, chỉ dành cho em.';
       const accessible=document.createElement('span');accessible.className='sr-only';accessible.textContent=text;

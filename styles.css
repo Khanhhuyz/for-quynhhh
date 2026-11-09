@@ -53,3 +53,4 @@ body{background:#faf3ed;color:#74495c}
 @media(max-height:600px){.sticker-crop>svg{max-height:85px}}
 
 .typed-character{opacity:0}.typed-character.is-visible{opacity:1}
+.sentence-outgoing{pointer-events:none;will-change:opacity,translate,filter}

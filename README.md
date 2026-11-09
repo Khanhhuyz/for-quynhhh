@@ -47,3 +47,6 @@ Theo yêu cầu mới nhất, toàn bộ 8 sticker bạn nam đang có `enabled:
 Các ảnh bạn nam đang ẩn chỉ giữ tại máy, được loại khỏi Git và không tải lên repo công khai. Muốn bật lại cần thêm ảnh tương ứng vào repo.
 
 Hiệu ứng nhập chữ dùng thời gian phát nhạc: tạm dừng sẽ dừng gõ, phát tiếp sẽ tiếp tục; tốc độ được canh để hoàn thành trước câu kế. Thiết bị giảm chuyển động hiển thị ngay toàn bộ câu. Chạm màn hình vẫn chuyển ngay sang câu mới.
+
+Chuyển câu: câu cũ mờ dần và trôi lên trong 380 ms; câu mới hiện mềm từ phía dưới trong 680 ms, đồng thời gõ từng ký tự. Chạm liên tục hủy lớp chuyển cũ để tránh chồng nhiều câu. Chế độ giảm chuyển động bỏ hiệu ứng này.
+
