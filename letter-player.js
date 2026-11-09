@@ -2,6 +2,7 @@
   'use strict';
   const $=id=>document.getElementById(id);
   const content=window.CARD_CONTENT, song=content.music, timing=window.LetterTiming;
+  const autoAdvance=content.autoAdvance!==false;
   const audio=$('background-music'), reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
   const start=song.startSeconds||0, offset=song.sourceOffsetSeconds||0;
   let end=song.durationSeconds, opened=false, started=false, finished=false;
@@ -249,14 +250,14 @@
     const time=audio.currentTime||start;
     const state=timing.snapshot(cues,time,start,end);
     const automatic=state.visible-1;
-    if(manualFloor>=0){
+    if(autoAdvance&&manualFloor>=0){
       if(manualFloor<previousAutomatic&&automatic>previousAutomatic){
         manualFloor=Math.min(entries.length-1,manualFloor+automatic-previousAutomatic);
       }
       if(manualFloor===automatic)manualFloor=-1;
     }
     previousAutomatic=automatic;
-    const index=started?(manualFloor>=0?manualFloor:automatic):-1;
+    const index=started?(autoAdvance?(manualFloor>=0?manualFloor:automatic):Math.max(0,manualFloor)):-1;
     if(index!==lastIndex){
       transitionSentence(index);
       lastIndex=index;
@@ -268,7 +269,7 @@
       typedCount=0;typingStart=time;
       instantSentence=audio.paused||audio.ended;
       const nextCue=cues.find(cue=>cue.time>time)?.time??end;
-      typingDuration=Math.max(.15,Math.min(3.6,typedCharacters.length*.045,(nextCue-time)*.72));
+      typingDuration=Math.max(.15,Math.min(3.6,typedCharacters.length*.045,autoAdvance?(nextCue-time)*.72:Infinity));
     }
     const count=reducedMotion.matches||index<0||instantSentence?typedCharacters.length:Math.min(typedCharacters.length,Math.floor(Math.max(0,time-typingStart)/typingDuration*typedCharacters.length)+1);
     // Hidden characters keep their place so the sentence does not jump as it is typed.
@@ -297,16 +298,16 @@
     if(!audio.paused){audio.pause();return;}
     if(finished)reset();
     if(failed)audio.load();failed=false;
-    try{const play=audio.play();loading=true;controls();await play;loading=false;controls('Nhạc đang phát. Từng lời thương sẽ đến cùng giai điệu.');}
+    try{const play=audio.play();loading=true;controls();await play;loading=false;controls(autoAdvance?'Nhạc đang phát. Từng lời thương sẽ đến cùng giai điệu.':'Nhạc đang phát. Chạm trái/phải để chuyển câu.');}
     catch(error){loading=false;if(error.name==='AbortError'){controls();return;}failed=true;controls('Chưa phát được âm thanh. Em thử bấm phát lại nhé.',true);}
   }
   audio.addEventListener('loadedmetadata',()=>{if(Number.isFinite(audio.duration)&&audio.duration>start){end=audio.duration;cues=timing.createCues(entries,start,end);}controls();paint();});
-  audio.addEventListener('playing',()=>{loading=false;failed=false;started=true;finished=manualFloor>=entries.length;cancelAnimationFrame(frame);controls('Nhạc đang phát.');animate();});
+  audio.addEventListener('playing',()=>{loading=false;failed=false;started=true;finished=manualFloor>=entries.length;cancelAnimationFrame(frame);controls(autoAdvance?'Nhạc đang phát.':'Nhạc đang phát. Chạm trái/phải để chuyển câu.');animate();});
   audio.addEventListener('pause',()=>{loading=false;cancelAnimationFrame(frame);paint();controls('Nhạc và tâm thư đang tạm dừng.');});
   audio.addEventListener('waiting',()=>{loading=true;controls('Đang đợi âm thanh…',true);});
   audio.addEventListener('timeupdate',paint);
   audio.addEventListener('seeked',paint);
-  audio.addEventListener('ended',()=>{loading=false;finished=true;cancelAnimationFrame(frame);paint();controls('Giai điệu đã khép lại. Còn một câu hỏi nhỏ dành cho em.');});
+  audio.addEventListener('ended',()=>{loading=false;if(autoAdvance)finished=true;cancelAnimationFrame(frame);paint();controls(autoAdvance?'Giai điệu đã khép lại. Còn một câu hỏi nhỏ dành cho em.':'Nhạc đã kết thúc. Em vẫn có thể chạm trái/phải để đọc tiếp.');});
   audio.addEventListener('error',()=>{loading=false;failed=true;cancelAnimationFrame(frame);controls('Chưa tải được bản nhạc. Em thử bấm phát lại nhé.',true);});
   $('unseal-letter').addEventListener('click',toggle);
   $('play-letter').addEventListener('click',toggle);

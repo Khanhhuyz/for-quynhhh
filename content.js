@@ -1,5 +1,6 @@
 // Thay nội dung mẫu ở đây. Ảnh và nhạc có thể đặt trong thư mục assets/.
 window.CARD_CONTENT = {
+  autoAdvance: false,
   greeting: "Gửi em, người anh thương.",
   greetingAt: 0,
   signoff: "Thương em, hôm nay và những ngày sau nữa.",

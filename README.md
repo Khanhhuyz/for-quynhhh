@@ -83,3 +83,6 @@ Nắm tay đã vẽ lại: hai bàn tay riêng với hai sắc da, nét ngón ta
 
 Cảnh nắm tay hiện đã quay về nét vẽ đơn giản ban đầu: hai cánh tay cong, tay nắm nhỏ ở giữa và cổ tay tròn. Vẫn giữ hiệu ứng tung tăng, tim nhỏ, ảnh tim tay đã bỏ dấu hỏi và việc tính lại vị trí khi ảnh tải xong.
 
+
+Đang thử chế độ chuyển câu hoàn toàn bằng tay: autoAdvance:false trong content.js. Nhạc vẫn phát, chữ vẫn gõ, sticker vẫn chuyển động theo thời gian nhưng câu chỉ đổi khi chạm trái/phải hoặc dùng phím mũi tên. Nhạc kết thúc không tự nhảy tới câu hỏi. Muốn trở lại chuyển câu theo nhạc đặt autoAdvance:true.
+
