@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+node_modules/
+.preview/
+
+# Local-only images and unused draft assets
+assets/love-sticker.png
+assets/boy-*.png
+assets/memory-*.svg
+assets/our-little-melody.wav
+__pycache__/

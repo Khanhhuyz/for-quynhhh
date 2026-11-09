@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f9eef0">
+  <meta name="description" content="Một giai điệu, những lời thương hiện lên theo nhạc, chỉ dành cho em.">
+  <title>Gửi em — một chút thương, thật nhiều nhớ</title>
+  <link rel="icon" href="assets/heart.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="letter-player.css">
+  <script src="content.js" defer></script>
+  <script src="letter-timing.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="letter-player.js" defer></script>
+</head>
+<body>
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <div class="silk silk-one" aria-hidden="true"></div><div class="silk silk-two" aria-hidden="true"></div><div class="paper-grain" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="wordmark" href="#" aria-label="Gửi em">gửi em<span>♡</span></a>
+    <span class="chapter-badge" id="chapter-badge">LỜI THƯƠNG</span>
+    <div class="header-actions"><button class="quiet-button" id="read-all" aria-label="Đọc toàn bộ tâm thư">Lá thư</button></div>
+  </header>
+
+  <main class="stage" id="main">
+    <div class="sticker-layer" id="sticker-layer" aria-hidden="true" hidden></div>
+    <div class="opening" id="envelope">
+      <p class="eyebrow">MỘT GIAI ĐIỆU. VÀI ĐIỀU ANH MUỐN NÓI.</p>
+      <h1>Gửi em,<br><em>người anh thương.</em></h1>
+      <p class="opening-note">Đeo tai nghe, chậm lại một chút.<br>Những lời anh giữ trong lòng sẽ ở đây.</p>
+      <button class="button button-primary" id="unseal-letter">Mở lời thương <span aria-hidden="true">↗</span></button>
+    </div>
+
+    <div class="cinema" id="letter-paper" hidden>
+      <div class="line-stage" id="line-stage" role="button" tabindex="0" aria-label="Chuyển sang câu tiếp theo">
+        <p class="current-sentence" id="current-sentence" aria-live="polite" aria-atomic="true"></p>
+        <p class="next-sentence" id="next-sentence" aria-hidden="true"></p>
+        <span class="tap-hint">CHẠM NHẸ ĐỂ SANG CÂU TIẾP <span aria-hidden="true">↗</span></span>
+      </div>
+      <div class="question-section" id="question" aria-labelledby="question-title" hidden>
+        <span class="question-heart" aria-hidden="true">♡</span>
+        <p class="eyebrow">VÀ CÒN MỘT ĐIỀU NỮA…</p>
+        <h2 id="question-title"></h2><p class="question-description" id="question-description"></p>
+        <div class="answer-buttons"><button class="button button-primary" id="answer-yes">Em đồng ý <span aria-hidden="true">♡</span></button><button class="button button-secondary" id="answer-later">Để em nghĩ thêm nhé</button></div>
+        <p class="answer-message" id="answer-message" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </main>
+
+  <div class="player-dock" id="song-panel" hidden>
+    <button class="transport-play" id="play-letter" aria-label="Phát nhạc và tâm thư">▷</button>
+    <div class="track-meta"><b id="song-title">Viên Đá Nhỏ</b><span id="song-artist">Nguyễn Hùng</span></div>
+    <button class="restart-button" id="restart-letter" aria-label="Nghe lại từ mốc 0 phút 41 giây" disabled>↺</button>
+    <p class="player-status" id="player-status" role="status"></p>
+  </div>
+  <footer class="site-footer">một chút thương, thật nhiều nhớ <span aria-hidden="true">♡</span></footer>
+
+  <dialog id="letter-dialog" class="letter-dialog"><button class="dialog-close" id="close-letter" aria-label="Đóng tâm thư">×</button><p class="eyebrow">NHỮNG LỜI ANH MUỐN GỬI EM</p><h2 id="full-greeting"></h2><div id="full-letter"></div><p id="full-signoff"></p><p class="handwritten" id="full-signature"></p></dialog>
+  <audio id="background-music" src="assets/vien-da-nho-from-41.m4a" preload="metadata"></audio>
+</body>
+</html>
