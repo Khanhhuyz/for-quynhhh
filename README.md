@@ -86,3 +86,6 @@ Cảnh nắm tay hiện đã quay về nét vẽ đơn giản ban đầu: hai c�
 
 Đang thử chế độ chuyển câu hoàn toàn bằng tay: autoAdvance:false trong content.js. Nhạc vẫn phát, chữ vẫn gõ, sticker vẫn chuyển động theo thời gian nhưng câu chỉ đổi khi chạm trái/phải hoặc dùng phím mũi tên. Nhạc kết thúc không tự nhảy tới câu hỏi. Muốn trở lại chuyển câu theo nhạc đặt autoAdvance:true.
 
+
+Sticker hiện được tải sẵn và giải mã trước khi mở thiệp. sticker-assets.js chỉ chuẩn bị ảnh thật sự dùng trong câu chuyện, gộp URL trùng, tải tối đa 4 ảnh đồng thời và giữ lại chính phần tử ảnh đã sẵn sàng để dùng lại khi tiến/lùi. Nút mở hiển thị tiến độ và chỉ bật khi toàn bộ ảnh sẵn sàng; có thể thử lại nếu một ảnh lỗi. Các cảnh không còn bắt đầu tải ảnh khi vừa xuất hiện. node --test tests/*.test.cjs kiểm tra cả thời gian và bộ tải ảnh.
+

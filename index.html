@@ -7,12 +7,13 @@
   <meta name="description" content="Một giai điệu, những lời thương hiện lên theo nhạc, chỉ dành cho em.">
   <title>for u — from my heart</title>
   <link rel="icon" href="assets/heart.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=20261109-manual">
+  <link rel="stylesheet" href="styles.css?v=20261109-preload">
   <link rel="stylesheet" href="letter-player.css">
   <script src="content.js?v=20261109-manual" defer></script>
   <script src="letter-timing.js" defer></script>
   <script src="app.js" defer></script>
-  <script src="letter-player.js?v=20261109-for-u" defer></script>
+  <script src="sticker-assets.js" defer></script>
+  <script src="letter-player.js?v=20261109-preload" defer></script>
 </head>
 <body>
   <div class="ambient-glow" aria-hidden="true"></div>
@@ -30,7 +31,8 @@
       <p class="eyebrow">MỘT GIAI ĐIỆU. VÀI ĐIỀU ANH MUỐN NÓI.</p>
       <h1>Gửi em,<br><em>người anh thương.</em></h1>
       <p class="opening-note">Đeo tai nghe, chậm lại một chút.<br>Những lời anh giữ trong lòng sẽ ở đây.</p>
-      <button class="button button-primary" id="unseal-letter">Mở lời thương <span aria-hidden="true">↗</span></button>
+      <button class="button button-primary" id="unseal-letter" disabled aria-busy="true">Đang chuẩn bị thiệp…</button>
+      <p class="asset-status" id="asset-status" role="status" aria-live="polite"></p>
     </div>
 
     <div class="cinema" id="letter-paper" hidden>

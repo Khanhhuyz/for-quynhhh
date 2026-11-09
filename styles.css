@@ -82,4 +82,6 @@ body{background:#faf3ed;color:#74495c}
 .stroll-arms .cuff{stroke:#fffaf5;stroke-width:2}
 .stroll-hearts path{fill:#f2c3d0;stroke:#c78299;stroke-width:1.8;stroke-linejoin:round}
 .sticker-layer[data-stroll=true] .story-actor{width:calc(clamp(90px,12vw,140px)*var(--actor-scale,1))}
+.asset-status{min-height:22px;margin-top:12px;font-size:10px;line-height:1.8;color:#ad8d99}
+.button:disabled{cursor:wait;opacity:.72;transform:none}
 @media(max-height:600px){.sticker-layer[data-stroll=true] .story-actor{width:calc(75px*var(--actor-scale,1))}}

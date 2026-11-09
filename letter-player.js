@@ -18,6 +18,33 @@
   let storyStroll=null;
   const storyScenes=content.stickerScenes||[];
   const activeStickers=content.stickers.filter(sticker=>sticker.enabled!==false);
+  const imageCache=window.StickerAssets.createImageCache();
+  const imageUrl=sticker=>sticker.src+(sticker.version?`?v=${sticker.version}`:'');
+  const storyImages=storyScenes.length?storyScenes.flatMap(scene=>[
+    ...scene.actors.map(imageUrl),
+    ...['rider','parked','bouquet','pout'].map(key=>scene.bicycle?.[key]).filter(Boolean)
+  ]):activeStickers.map(imageUrl);
+  let assetsReady=false,preparingAssets=null;
+  function preparedImage(url){
+    const image=imageCache.get(url);
+    image.removeAttribute('style');image.className='';image.alt='';image.draggable=false;
+    return image;
+  }
+  function prepareAssets(){
+    if(preparingAssets)return preparingAssets;
+    const button=$('unseal-letter'), label=$('asset-status');
+    button.disabled=true;button.setAttribute('aria-busy','true');
+    label.textContent='Chuẩn bị những điều nhỏ xinh cho em…';
+    preparingAssets=imageCache.prepare(storyImages,(done,total)=>{
+      button.textContent=`Đang chuẩn bị thiệp… ${total?Math.round(done/total*100):100}%`;
+    }).then(result=>{
+      assetsReady=result.ready;
+      button.textContent=result.ready?'Mở lời thương ↗':'Thử tải lại ảnh ↺';
+      label.textContent=result.ready?'Mọi thứ đã sẵn sàng, chạm để mở nhé.':'Có ảnh chưa tải được. Em chạm để thử lại nhé.';
+      return result.ready;
+    }).finally(()=>{preparingAssets=null;button.disabled=false;button.removeAttribute('aria-busy');});
+    return preparingAssets;
+  }
   function showSticker(index){
     const layer=$('sticker-layer');
     if(index<0||finished||!activeStickers.length){
@@ -135,7 +162,7 @@
     const root=document.createElement('div');root.className='bicycle-arrival';root.dataset.phase='waiting';
     const images={};
     for(const [key,src] of Object.entries({rider:config.rider,parked:config.parked,bouquet:config.bouquet,pout:config.pout}).filter(([,src])=>src)){
-      const img=document.createElement('img');img.src=src;img.alt='';img.draggable=false;img.className=`bicycle-${key}`;root.append(img);images[key]=img;
+      const img=preparedImage(src);img.className=`bicycle-${key}`;root.append(img);images[key]=img;
     }
     const wheels=document.createElementNS('http://www.w3.org/2000/svg','svg');
     wheels.classList.add('bicycle-wheels');wheels.setAttribute('viewBox','0 0 1448 1086');wheels.setAttribute('aria-hidden','true');
@@ -189,8 +216,7 @@
       const image=document.createElementNS(ns,'image');image.setAttribute('href',sticker.src);image.setAttribute('width',sw);image.setAttribute('height',sh);
       svg.append(image);crop.append(svg);
     }else{
-      const img=document.createElement('img');img.src=sticker.src+(sticker.version?`?v=${sticker.version}`:'');img.alt='';img.decoding='async';img.draggable=false;
-      img.addEventListener('load',updateStickerMotion);crop.append(img);
+      crop.append(preparedImage(imageUrl(sticker)));
     }
     wrap.append(crop);
     return wrap;
@@ -294,6 +320,7 @@
     paint();controls();
   }
   async function toggle(){
+    if(!assetsReady){await prepareAssets();return;}
     open();
     if(!audio.paused){audio.pause();return;}
     if(finished)reset();
@@ -326,5 +353,5 @@
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)paint();});
   window.addEventListener('resize',updateStickerMotion);
   window.addEventListener('pagehide',()=>{audio.pause();cancelAnimationFrame(frame);});
-  paint();controls();
+  prepareAssets();paint();controls();
 })();
