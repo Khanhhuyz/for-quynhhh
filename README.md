@@ -56,3 +56,6 @@ Sticker hiện nguyên hình, đứng yên; mỗi lần chuyển câu chỉ mờ
 
 Bản thử câu chuyện sticker dùng stickerScenes trong content.js: câu 0 ảnh khóc; câu 1 girl-black; câu 2 surprise nhìn về girl-light; từ câu 3 cap tiến tới girl-pink trong 7 giây rồi giữ cảnh này. Chuyển động dùng đồng hồ nhạc, tạm dừng khi nhạc dừng và không bắt đầu lại khi chỉ chuyển câu trong cùng cảnh.
 
+
+Bộ sticker chuẩn bị cho cảnh tiếp theo: sticker-pout.png (bĩu môi), sticker-finger-heart.png (tim tay), girl-glasses-cutout.png (bạn nữ đeo kính). Các ảnh này đã tách nền, có viền trắng, tạm enabled:false để giữ nguyên bốn cảnh đang thử.
+
