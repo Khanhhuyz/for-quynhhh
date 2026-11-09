@@ -36,13 +36,13 @@
     if(preparingAssets)return preparingAssets;
     const button=$('unseal-letter'), label=$('asset-status');
     button.disabled=true;button.setAttribute('aria-busy','true');
-    label.textContent='Chuẩn bị những điều nhỏ xinh cho em…';
+    label.textContent='sẵn sàng đón nhận chưa nàa....';
     preparingAssets=imageCache.prepare(storyImages,(done,total)=>{
-      button.textContent=`Đang chuẩn bị thiệp… ${total?Math.round(done/total*100):100}%`;
+      button.textContent=`Đang tìm đường vào tim...${total?Math.round(done/total*100):100}%`;
     }).then(result=>{
       assetsReady=result.ready;
-      button.textContent=result.ready?'Mở lời thương ↗':'Thử tải lại ảnh ↺';
-      label.textContent=result.ready?'Mọi thứ đã sẵn sàng, chạm để mở nhé.':'Có ảnh chưa tải được. Em chạm để thử lại nhé.';
+      button.textContent=result.ready?'Mở cửa trái tim':'Thử tải lại ảnh ↺';
+      label.textContent=result.ready?'sẵn sàng đón nhận chưa nàa....':'Có ảnh chưa tải được. Em chạm để thử lại nhé.';
       return result.ready;
     }).finally(()=>{preparingAssets=null;button.disabled=false;button.removeAttribute('aria-busy');});
     return preparingAssets;
