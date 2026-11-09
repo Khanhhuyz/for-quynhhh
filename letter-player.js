@@ -22,6 +22,8 @@
     if(index===stickerIndex)return;
     const first=layer.hidden;
     stickerIndex=index;layer.hidden=false;stickerFade?.cancel();
+    const nextScene=storyScenes.findLast(scene=>index>=scene.fromLine);
+    if(nextScene?.preserveExisting){renderSticker(index);return;}
     if(first||reducedMotion.matches){renderSticker(index);return;}
     // Fade the whole image once per sentence; it never follows the typing effect.
     stickerFade=layer.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-in',fill:'forwards'});
@@ -39,9 +41,16 @@
     if(storyScenes.length){
       layer.dataset.story='true';delete layer.dataset.side;
       const actors=storyScenes[scene].actors.map((actor,i)=>{
-        const wrap=createSticker(actor);wrap.classList.add('story-actor');
+        const existing=Array.from(layer.children).find(child=>child.dataset.source===actor.src);
+        const wrap=existing||createSticker(actor);wrap.classList.add('story-actor');
+        wrap.dataset.source=actor.src;
+        wrap.style.setProperty('--actor-scale',actor.scale||1);
         wrap.style.setProperty('--tilt',i%2?'5deg':'-5deg');
         if(actor.flip)wrap.classList.add('story-flipped');
+        if(!existing&&actor.doodles)addStickerDoodles(wrap,actor.doodles);
+        if(!existing&&storyScenes[scene].preserveExisting&&!reducedMotion.matches){
+          wrap.animate([{opacity:0},{opacity:1}],{duration:320,easing:'ease-out'});
+        }
         storyActors.push({element:wrap,from:actor.x,to:actor.toX??actor.x});
         return wrap;
       });
@@ -74,6 +83,19 @@
     }
     wrap.append(crop);
     return wrap;
+  }
+  function addStickerDoodles(wrap,type){
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.classList.add('actor-doodles');svg.setAttribute('viewBox','0 0 160 180');
+    svg.setAttribute('aria-hidden','true');
+    const heart='M0 5 C-10 -6 -20 3 -15 12 L0 25 L15 12 C20 3 10 -6 0 5Z';
+    if(type==='hearts'){
+      svg.innerHTML=[[20,42,.55],[134,28,.65],[145,96,.42],[15,126,.4],[77,10,.38]].map(([x,y,s],i)=>
+        `<g class="doodle-float" style="--doodle-delay:${i*-.55}s"><path transform="translate(${x} ${y}) scale(${s})" d="${heart}" fill="${i%2?'#edb8c5':'#f9dce2'}"/></g>`).join('');
+    }else{
+      svg.innerHTML='<g class="doodle-float"><path d="M23 24 L17 13 M33 20 L32 7 M44 24 L50 13"/><path d="M131 30 Q136 15 141 29 L136 48 M134 56 L134 58"/></g><g class="doodle-float" style="--doodle-delay:-1.2s"><path d="M142 78 Q140 89 131 91 Q142 91 144 103 Q145 91 155 89 Q144 88 142 78Z" fill="#f9dce2"/><path d="M17 75 Q16 83 9 85 Q17 84 20 93 Q20 84 28 82 Q19 82 17 75Z" fill="#f8dfb2"/><path transform="translate(28 117) scale(.45)" d="'+heart+'" fill="#edb8c5"/></g>';
+    }
+    wrap.append(svg);
   }
   $('song-title').textContent=song.title;
   $('song-artist').textContent=song.artist;

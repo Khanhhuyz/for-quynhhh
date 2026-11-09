@@ -59,3 +59,6 @@ Bản thử câu chuyện sticker dùng stickerScenes trong content.js: câu 0 �
 
 Bộ sticker chuẩn bị cho cảnh tiếp theo: sticker-pout.png (bĩu môi), sticker-finger-heart.png (tim tay), girl-glasses-cutout.png (bạn nữ đeo kính). Các ảnh này đã tách nền, có viền trắng, tạm enabled:false để giữ nguyên bốn cảnh đang thử.
 
+
+Cảnh 1 giữ nguyên sticker-cry khi girl-black xuất hiện (preserveExisting). Surprise có nét vẽ SVG 2D độc lập: tia ngạc nhiên, sao và tim nhỏ. Girl-pink scale 1.55 để chiều cao gần bằng cap. Năm trái tim SVG nằm bên trong phần tử cap nên luôn đi theo vị trí của cap; nét vẽ chuyển động nhẹ và tắt khi bật giảm chuyển động.
+

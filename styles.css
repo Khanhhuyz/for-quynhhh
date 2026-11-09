@@ -54,7 +54,10 @@ body{background:#faf3ed;color:#74495c}
 
 .typed-character{opacity:0}.typed-character.is-visible{opacity:1}
 .sentence-outgoing{pointer-events:none;will-change:opacity,translate,filter}
-.sticker-layer[data-story] .story-actor{top:0;width:clamp(90px,15vw,175px);right:auto;transform:translateX(-50%) rotate(var(--tilt));will-change:left}
+.sticker-layer[data-story] .story-actor{top:0;width:calc(clamp(90px,15vw,175px)*var(--actor-scale,1));right:auto;transform:translateX(-50%) rotate(var(--tilt));will-change:left}
 .story-flipped .sticker-crop{transform:scaleX(-1)}
-@media(max-width:760px){.sticker-layer[data-story] .story-actor{width:90px}.story-actor .sticker-crop>img{max-height:125px}}
-@media(max-height:600px){.sticker-layer[data-story] .story-actor{width:75px}.story-actor .sticker-crop>img{max-height:85px}}
+@media(max-width:760px){.sticker-layer[data-story] .story-actor{width:calc(90px*var(--actor-scale,1))}.story-actor .sticker-crop>img{max-height:125px}}
+@media(max-height:600px){.sticker-layer[data-story] .story-actor{width:calc(75px*var(--actor-scale,1))}.story-actor .sticker-crop>img{max-height:85px}}
+.actor-doodles{position:absolute;inset:-18px -24% auto;width:148%;height:calc(100% + 36px);overflow:visible;pointer-events:none;fill:none;stroke:#c47c93;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px #fff8)}
+.doodle-float{animation:doodle-drift 2.8s ease-in-out var(--doodle-delay,0s) infinite alternate}
+@keyframes doodle-drift{from{translate:0 0;opacity:.8}to{translate:0 -4px;opacity:1}}
