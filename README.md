@@ -89,3 +89,6 @@ Cảnh nắm tay hiện đã quay về nét vẽ đơn giản ban đầu: hai c�
 
 Sticker hiện được tải sẵn và giải mã trước khi mở thiệp. sticker-assets.js chỉ chuẩn bị ảnh thật sự dùng trong câu chuyện, gộp URL trùng, tải tối đa 4 ảnh đồng thời và giữ lại chính phần tử ảnh đã sẵn sàng để dùng lại khi tiến/lùi. Nút mở hiển thị tiến độ và chỉ bật khi toàn bộ ảnh sẵn sàng; có thể thử lại nếu một ảnh lỗi. Các cảnh không còn bắt đầu tải ảnh khi vừa xuất hiện. node --test tests/*.test.cjs kiểm tra cả thời gian và bộ tải ảnh.
 
+
+Nội dung chính hiện là thư Huy gửi Quỳnhh do người dùng cung cấp, giữ cách xưng H/Q và từ ngữ nhìu, khom. Chia thành 26 ý ngắn, lời chào Gửi Quỳnhh, câu kết Huy mong Quỳnh luôn được là chính mình khi ở bên Huy. và chữ ký Huy. Vẫn chuyển câu hoàn toàn bằng tay; các mốc at chỉ là dự phòng, chưa canh lại theo câu hát cho thư mới.
+
