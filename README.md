@@ -2,7 +2,7 @@
 
 Thiệp web hồng nhẹ bằng HTML/CSS/JavaScript, dùng trên điện thoại và laptop, phù hợp GitHub Pages. Không cần cài thư viện hoặc build.
 
-Toàn bộ trải nghiệm nằm trên **một màn hình**, theo cách trình bày trong ảnh tham chiếu: mỗi lần chỉ một câu lớn in nghiêng ở giữa, câu kế tiếp mờ phía dưới, nút nhạc nhỏ ở đáy, không có thanh tua. Chuyển câu bằng hiệu ứng hiện dần theo nhạc, không tích lũy đoạn văn hay cuộn trang. Giữ nền hồng nhẹ. Sticker tách nền xuất hiện bên cạnh câu đang chạy; **Lá thư** mở toàn bộ nội dung để đọc tùy ý. Đã bỏ mục Kỷ niệm.
+Toàn bộ trải nghiệm nằm trên **một màn hình**, theo cách trình bày trong ảnh tham chiếu: mỗi lần chỉ một câu lớn in nghiêng ở giữa, chữ được gõ dần từng ký tự, nút nhạc nhỏ ở đáy, không có thanh tua. Chữ được gõ dần theo nhạc, không hiển thị câu tiếp theo bên dưới, không tích lũy đoạn văn hay cuộn trang. Giữ nền hồng nhẹ. Sticker tách nền xuất hiện bên cạnh câu đang chạy; **Lá thư** mở toàn bộ nội dung để đọc tùy ý. Đã bỏ mục Kỷ niệm.
 
 ## Xem thử
 
@@ -45,3 +45,5 @@ Sửa danh sách `stickers` trong `content.js` để thay ảnh hoặc đổi th
 Theo yêu cầu mới nhất, toàn bộ 8 sticker bạn nam đang có `enabled: false`. Thiệp chỉ hiển thị 5 ảnh bạn nữ. Tệp ảnh vẫn được giữ nguyên; bỏ `enabled: false` để bật lại.
 
 Các ảnh bạn nam đang ẩn chỉ giữ tại máy, được loại khỏi Git và không tải lên repo công khai. Muốn bật lại cần thêm ảnh tương ứng vào repo.
+
+Hiệu ứng nhập chữ dùng thời gian phát nhạc: tạm dừng sẽ dừng gõ, phát tiếp sẽ tiếp tục; tốc độ được canh để hoàn thành trước câu kế. Thiết bị giảm chuyển động hiển thị ngay toàn bộ câu. Chạm màn hình vẫn chuyển ngay sang câu mới.

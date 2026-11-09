@@ -5,7 +5,8 @@
   const audio=$('background-music'), reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
   const start=song.startSeconds||0, offset=song.sourceOffsetSeconds||0;
   let end=song.durationSeconds, opened=false, started=false, finished=false;
-  let loading=false, failed=false, frame, lastIndex=-2, transition, manualFloor=-1;
+  let loading=false, failed=false, frame, lastIndex=-2, manualFloor=-1;
+  let typedCharacters=[], typedCount=0, typingStart=0, typingDuration=1;
   const entries=[{text:content.greeting,at:content.greetingAt},...content.letterLines,{text:content.signoff,at:content.signoffAt},{text:content.signature,at:content.signatureAt}];
   let cues=timing.createCues(entries,start,end);
   let stickerScene=-1;
@@ -56,13 +57,21 @@
     const state=timing.snapshot(cues,time,start,end);
     const index=started?Math.max(state.visible-1,manualFloor):-1;
     if(index!==lastIndex){
-      lastIndex=index;transition?.cancel();
-      $('current-sentence').textContent=entries[index]?.text||'Một giai điệu, chỉ dành cho em.';
-      $('next-sentence').textContent=index>=0?(entries[index+1]?.text||'Và còn một điều anh muốn hỏi em…'):'';
-      if(!reducedMotion.matches&&index>=0){
-        transition=$('current-sentence').animate([{opacity:0,filter:'blur(5px)',translate:'0 14px'},{opacity:1,filter:'blur(0)',translate:'0 0'}],{duration:700,easing:'cubic-bezier(.2,.65,.3,1)'});
-      }
+      lastIndex=index;
+      const text=entries[index]?.text||'Một giai điệu, chỉ dành cho em.';
+      const accessible=document.createElement('span');accessible.className='sr-only';accessible.textContent=text;
+      const copy=document.createElement('span');copy.setAttribute('aria-hidden','true');
+      typedCharacters=Array.from(text,character=>{const span=document.createElement('span');span.className='typed-character';span.textContent=character;return span;});
+      copy.append(...typedCharacters);$('current-sentence').replaceChildren(accessible,copy);
+      typedCount=0;typingStart=time;
+      const nextCue=cues.find(cue=>cue.time>time)?.time??end;
+      typingDuration=Math.max(.15,Math.min(3.6,typedCharacters.length*.045,(nextCue-time)*.72));
     }
+    const count=reducedMotion.matches||index<0?typedCharacters.length:Math.min(typedCharacters.length,Math.floor(Math.max(0,time-typingStart)/typingDuration*typedCharacters.length)+1);
+    // Hidden characters keep their place so the sentence does not jump as it is typed.
+    if(count<typedCount)typedCharacters.slice(count,typedCount).forEach(span=>span.classList.remove('is-visible'));
+    if(count>typedCount)typedCharacters.slice(typedCount,count).forEach(span=>span.classList.add('is-visible'));
+    typedCount=count;
     setQuestion(finished);
     showSticker(index);
   }
