@@ -11,6 +11,8 @@
   const entries=[{text:content.greeting,at:content.greetingAt},...content.letterLines,{text:content.signoff,at:content.signoffAt},{text:content.signature,at:content.signatureAt}];
   let cues=timing.createCues(entries,start,end);
   let stickerScene=-1, stickerIndex=-2, stickerFade;
+  let storyStartedAt=0, storyActors=[];
+  const storyScenes=content.stickerScenes||[];
   const activeStickers=content.stickers.filter(sticker=>sticker.enabled!==false);
   function showSticker(index){
     const layer=$('sticker-layer');
@@ -30,11 +32,35 @@
   }
   function renderSticker(index){
     const layer=$('sticker-layer');
-    const scene=Math.floor(index/2);
+    const scene=storyScenes.length?Math.max(0,storyScenes.findLastIndex(scene=>index>=scene.fromLine)):Math.floor(index/2);
     if(scene===stickerScene)return;
     stickerScene=scene;
+    storyActors=[];storyStartedAt=audio.currentTime||start;
+    if(storyScenes.length){
+      layer.dataset.story='true';delete layer.dataset.side;
+      const actors=storyScenes[scene].actors.map((actor,i)=>{
+        const wrap=createSticker(actor);wrap.classList.add('story-actor');
+        wrap.style.setProperty('--tilt',i%2?'5deg':'-5deg');
+        if(actor.flip)wrap.classList.add('story-flipped');
+        storyActors.push({element:wrap,from:actor.x,to:actor.toX??actor.x});
+        return wrap;
+      });
+      layer.replaceChildren(...actors);updateStickerMotion();return;
+    }
     const sticker=activeStickers[scene%activeStickers.length];
     layer.dataset.side=scene%2?'right':'left';
+    const wrap=createSticker(sticker);
+    const hearts=document.createElement('span');hearts.className='sticker-hearts';hearts.textContent='♡  ♡';
+    layer.replaceChildren(wrap,hearts);
+  }
+  function updateStickerMotion(){
+    if(!storyActors.length)return;
+    const duration=storyScenes[stickerScene]?.duration||1;
+    const progress=reducedMotion.matches?1:Math.max(0,Math.min(1,(audio.currentTime-storyStartedAt)/duration));
+    const eased=progress*progress*(3-2*progress);
+    storyActors.forEach(actor=>{actor.element.style.left=`${actor.from+(actor.to-actor.from)*eased}%`;});
+  }
+  function createSticker(sticker){
     const wrap=document.createElement('div');wrap.className='sentence-sticker';
     const crop=document.createElement('div');crop.className='sticker-crop';
     if(sticker.crop){
@@ -47,8 +73,7 @@
       const img=document.createElement('img');img.src=sticker.src;img.alt='';img.decoding='async';img.draggable=false;crop.append(img);
     }
     wrap.append(crop);
-    const hearts=document.createElement('span');hearts.className='sticker-hearts';hearts.textContent='♡  ♡';
-    layer.replaceChildren(wrap,hearts);
+    return wrap;
   }
   $('song-title').textContent=song.title;
   $('song-artist').textContent=song.artist;
@@ -111,6 +136,7 @@
     typedCount=count;
     setQuestion(finished);
     showSticker(index);
+    updateStickerMotion();
   }
   function animate(){paint();if(!audio.paused&&!audio.ended)frame=requestAnimationFrame(animate);}
   function open(){if(opened)return;opened=true;$('envelope').hidden=true;$('letter-paper').hidden=false;$('song-panel').hidden=false;}

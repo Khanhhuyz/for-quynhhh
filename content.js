@@ -50,6 +50,19 @@ window.CARD_CONTENT = {
     { at: 143, text: "Và anh vẫn muốn cùng em tạo thêm thật nhiều kỷ niệm." },
     { at: 152, text: "Thêm những cuộc hẹn nhỏ. Thêm những ngày bình yên." }
   ],
+  // Bản thử câu chuyện: mỗi cảnh đầu đi cùng một câu, rồi giữ cảnh cuối.
+  stickerScenes: [
+    { fromLine: 0, actors: [{ src: "assets/sticker-cry.png", x: 24 }] },
+    { fromLine: 1, actors: [{ src: "assets/girl-black.png", x: 76 }] },
+    { fromLine: 2, actors: [
+      { src: "assets/sticker-surprise.png", x: 24, flip: true },
+      { src: "assets/girl-light.png", x: 76 }
+    ] },
+    { fromLine: 3, duration: 7, actors: [
+      { src: "assets/sticker-cap.png", x: 18, toX: 52 },
+      { src: "assets/girl-pink.png", x: 78 }
+    ] }
+  ],
   // Sticker ảnh tách nền; crop (nếu có) dùng để hiển thị một biểu cảm từ sheet.
   stickers: [
     { src: "assets/love-sticker.png", enabled: false },

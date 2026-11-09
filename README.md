@@ -53,3 +53,6 @@ Chuyển câu: câu cũ mờ dần và trôi lên trong 380 ms; câu mới hiệ
 
 Sticker hiện nguyên hình, đứng yên; mỗi lần chuyển câu chỉ mờ đi trong 180 ms rồi hiện lại trong 260 ms, độc lập với hiệu ứng gõ chữ. Ảnh vẫn thay sau mỗi hai câu.
 
+
+Bản thử câu chuyện sticker dùng stickerScenes trong content.js: câu 0 ảnh khóc; câu 1 girl-black; câu 2 surprise nhìn về girl-light; từ câu 3 cap tiến tới girl-pink trong 7 giây rồi giữ cảnh này. Chuyển động dùng đồng hồ nhạc, tạm dừng khi nhạc dừng và không bắt đầu lại khi chỉ chuyển câu trong cùng cảnh.
+
