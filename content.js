@@ -64,12 +64,16 @@ window.CARD_CONTENT = {
     { fromLine: 3, duration: 7, actors: [
       { src: "assets/sticker-cap.png", x: 18, toX: 52, doodles: "hearts" },
       { src: "assets/girl-pink-peace.png", x: 78, scale: 1.38 }
+    ] },
+    { fromLine: 5, actors: [
+      { src: "assets/sticker-pink-sweater.png", x: 26, scale: 1.15, speech: "Vy thíc Kình" },
+      { src: "assets/girl-pink.png", x: 76, scale: 1.55 }
     ] }
   ],
   // Sticker ảnh tách nền; crop (nếu có) dùng để hiển thị một biểu cảm từ sheet.
   stickers: [
     // Ảnh mới đã sẵn sàng; chờ sắp xếp vào các cảnh tiếp theo.
-    { src: "assets/sticker-pink-sweater.png", enabled: false },
+    { src: "assets/sticker-pink-sweater.png" },
     { src: "assets/girl-pink-peace.png" },
     { src: "assets/sticker-bouquet.png", enabled: false },
     { src: "assets/sticker-pout.png", enabled: false },
@@ -83,7 +87,7 @@ window.CARD_CONTENT = {
     { src: "assets/boy-expressions.png", enabled: false, crop: [223,24,288,398,725,2170] },
     { src: "assets/girl-cheek.png" },
     { src: "assets/sticker-surprise.png" },
-    { src: "assets/girl-pink.png", enabled: false },
+    { src: "assets/girl-pink.png" },
     { src: "assets/boy-expressions.png", enabled: false, crop: [226,460,282,400,725,2170] },
     { src: "assets/boy-peace.png", enabled: false },
     { src: "assets/girl-green.png" },

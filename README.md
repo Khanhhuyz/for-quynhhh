@@ -62,3 +62,6 @@ Bộ sticker chuẩn bị cho cảnh tiếp theo: sticker-pout.png (bĩu môi), 
 
 Cảnh 1 giữ nguyên sticker-cry khi girl-black xuất hiện (preserveExisting). Surprise có nét vẽ SVG 2D độc lập: tia ngạc nhiên, sao và tim nhỏ. Girl-pink scale 1.55 để chiều cao gần bằng cap. Năm trái tim SVG nằm bên trong phần tử cap nên luôn đi theo vị trí của cap; nét vẽ chuyển động nhẹ và tắt khi bật giảm chuyển động.
 
+
+Cảnh từ câu 5 (mốc 24 giây của file đã cắt): sticker-pink-sweater đứng cạnh girl-pink, bong bóng thoại ghi đúng Vy thíc Kình. Cảnh cap trước đó kéo dài qua hai câu để đủ thời gian tiến lại gần. Lời thoại có bản văn bản dành cho trình đọc màn hình.
+

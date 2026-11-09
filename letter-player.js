@@ -17,7 +17,7 @@
   function showSticker(index){
     const layer=$('sticker-layer');
     if(index<0||finished||!activeStickers.length){
-      stickerFade?.cancel();layer.hidden=true;stickerIndex=-2;return;
+      stickerFade?.cancel();layer.hidden=true;stickerIndex=-2;$('story-caption').textContent='';return;
     }
     if(index===stickerIndex)return;
     const first=layer.hidden;
@@ -48,13 +48,19 @@
         wrap.style.setProperty('--tilt',i%2?'5deg':'-5deg');
         if(actor.flip)wrap.classList.add('story-flipped');
         if(!existing&&actor.doodles)addStickerDoodles(wrap,actor.doodles);
+        if(actor.speech&&!wrap.querySelector('.actor-speech')){
+          const bubble=document.createElement('p');bubble.className='actor-speech';bubble.textContent=actor.speech;
+          wrap.append(bubble);
+        }
         if(!existing&&storyScenes[scene].preserveExisting&&!reducedMotion.matches){
           wrap.animate([{opacity:0},{opacity:1}],{duration:320,easing:'ease-out'});
         }
         storyActors.push({element:wrap,from:actor.x,to:actor.toX??actor.x});
         return wrap;
       });
-      layer.replaceChildren(...actors);updateStickerMotion();return;
+      layer.replaceChildren(...actors);
+      $('story-caption').textContent=storyScenes[scene].actors.map(actor=>actor.speech||'').filter(Boolean).join(' ');
+      updateStickerMotion();return;
     }
     const sticker=activeStickers[scene%activeStickers.length];
     layer.dataset.side=scene%2?'right':'left';
