@@ -66,3 +66,10 @@ body{background:#faf3ed;color:#74495c}
 @keyframes speech-appear{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
 @media(max-width:760px){.actor-speech{font-size:11px;padding:8px 13px;top:-26px}}
 @media(max-height:600px){.actor-speech{font-size:10px;padding:5px 10px;top:-22px}}
+.bicycle-arrival{position:absolute;top:0;width:clamp(185px,28vw,330px);height:auto;pointer-events:none;will-change:left;opacity:0}
+.bicycle-rider{display:block;width:100%;height:auto}
+.bicycle-parked{position:absolute;left:0;top:var(--parked-top,40px);width:80%;height:auto;opacity:0}
+.bicycle-bouquet{position:absolute;top:0;left:var(--bouquet-left,70px);width:44%;height:auto;opacity:0;z-index:2}
+.bicycle-wheels{position:absolute;inset:0;width:100%;height:auto;fill:none;stroke:#63584c;stroke-width:3;stroke-opacity:.35;pointer-events:none}
+.wheel-spin{transform-box:fill-box;transform-origin:center}
+@media(max-height:600px){.bicycle-arrival{width:150px}}

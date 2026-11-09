@@ -68,6 +68,14 @@ window.CARD_CONTENT = {
     { fromLine: 5, actors: [
       { src: "assets/sticker-pink-sweater.png", x: 52, beside: 1, gap: 4, scale: 1.15, speech: "Vy thíc Kình" },
       { src: "assets/girl-pink.png", x: 76, scale: 1.55 }
+    ] },
+    { fromLine: 7, bicycle: {
+      delay: 2, rideSeconds: 6, dismountSeconds: 1.1,
+      rider: "assets/sticker-bike-rider.png",
+      parked: "assets/bicycle-parked.svg",
+      bouquet: "assets/sticker-bouquet.png"
+    }, actors: [
+      { src: "assets/girl-green.png", x: 77, scale: 1.2 }
     ] }
   ],
   // Sticker ảnh tách nền; crop (nếu có) dùng để hiển thị một biểu cảm từ sheet.
@@ -75,7 +83,7 @@ window.CARD_CONTENT = {
     // Ảnh mới đã sẵn sàng; chờ sắp xếp vào các cảnh tiếp theo.
     { src: "assets/sticker-pink-sweater.png" },
     { src: "assets/girl-pink-peace.png" },
-    { src: "assets/sticker-bouquet.png", enabled: false },
+    { src: "assets/sticker-bouquet.png" },
     { src: "assets/sticker-pout.png", enabled: false },
     { src: "assets/sticker-finger-heart.png", enabled: false },
     { src: "assets/girl-glasses-cutout.png", enabled: false },

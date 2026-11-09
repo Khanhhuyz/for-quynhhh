@@ -12,6 +12,7 @@
   let cues=timing.createCues(entries,start,end);
   let stickerScene=-1, stickerIndex=-2, stickerFade;
   let storyStartedAt=0, storyActors=[];
+  let bicycleArrival=null;
   const storyScenes=content.stickerScenes||[];
   const activeStickers=content.stickers.filter(sticker=>sticker.enabled!==false);
   function showSticker(index){
@@ -37,7 +38,7 @@
     const scene=storyScenes.length?Math.max(0,storyScenes.findLastIndex(scene=>index>=scene.fromLine)):Math.floor(index/2);
     if(scene===stickerScene)return;
     stickerScene=scene;
-    storyActors=[];storyStartedAt=audio.currentTime||start;
+    storyActors=[];bicycleArrival=null;storyStartedAt=audio.currentTime||start;
     if(storyScenes.length){
       layer.dataset.story='true';delete layer.dataset.side;
       const actors=storyScenes[scene].actors.map((actor,i)=>{
@@ -59,6 +60,7 @@
         return wrap;
       });
       layer.replaceChildren(...actors);
+      if(storyScenes[scene].bicycle)createBicycleArrival(layer,storyScenes[scene].bicycle);
       $('story-caption').textContent=storyScenes[scene].actors.map(actor=>actor.speech||'').filter(Boolean).join(' ');
       updateStickerMotion();return;
     }
@@ -80,6 +82,50 @@
         actor.element.style.left=`calc(${partner.from}% - ${spacing}px)`;
       }else actor.element.style.left=`${actor.from+(actor.to-actor.from)*eased}%`;
     });
+    updateBicycleArrival();
+  }
+  function createBicycleArrival(layer,config){
+    const root=document.createElement('div');root.className='bicycle-arrival';root.dataset.phase='waiting';
+    const images={};
+    for(const [key,src] of Object.entries({rider:config.rider,parked:config.parked,bouquet:config.bouquet})){
+      const img=document.createElement('img');img.src=src;img.alt='';img.draggable=false;img.className=`bicycle-${key}`;root.append(img);images[key]=img;
+    }
+    const wheels=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    wheels.classList.add('bicycle-wheels');wheels.setAttribute('viewBox','0 0 1448 1086');wheels.setAttribute('aria-hidden','true');
+    const spokes=Array.from({length:6},(_,i)=>`<path d="M-137 0 H137" transform="rotate(${i*30})"/>`).join('');
+    wheels.innerHTML=[398,1054].map(x=>`<g transform="translate(${x} 915)"><g class="wheel-spin"><circle r="140" stroke="transparent"/>${spokes}</g></g>`).join('');root.append(wheels);
+    layer.append(root);bicycleArrival={root,images,wheels,config};
+  }
+  function updateBicycleArrival(){
+    if(!bicycleArrival)return;
+    const {root,images,wheels,config}=bicycleArrival;
+    const elapsed=Math.max(0,audio.currentTime-storyStartedAt);
+    const ride=Math.max(0,Math.min(1,(elapsed-config.delay)/config.rideSeconds));
+    const dismount=reducedMotion.matches?1:Math.max(0,Math.min(1,(elapsed-config.delay-config.rideSeconds)/config.dismountSeconds));
+    const waiting=!reducedMotion.matches&&elapsed<config.delay;
+    const girl=storyActors[0], width=root.offsetWidth;
+    const girlCenter=$('sticker-layer').clientWidth*girl.from/100;
+    const finish=Math.max(0,girlCenter-girl.element.offsetWidth/2-width*.85);
+    const eased=1-Math.pow(1-ride,3);
+    root.style.left=`${reducedMotion.matches?finish:-width+(finish+width)*eased}px`;
+    root.style.opacity=waiting?'0':'1';
+    root.style.setProperty('--bouquet-left',`${girlCenter-girl.element.offsetWidth/2-width*.44-6-finish}px`);
+    root.style.setProperty('--parked-top',`${width*(.75-.8*2/3)}px`);
+    const gettingOff=Math.min(1,dismount/.55);
+    images.rider.style.opacity=waiting?'0':String(1-gettingOff);
+    wheels.style.opacity=images.rider.style.opacity;
+    images.parked.style.opacity=String(gettingOff);
+    const flowers=Math.max(0,Math.min(1,(dismount-.55)/.45));
+    images.bouquet.style.opacity=String(flowers);
+    images.bouquet.style.translate=`${(1-flowers)*-8}px ${(1-flowers)*5}px`;
+    const bob=ride<1&&!waiting?Math.sin(elapsed*9)*1.3:0;
+    images.rider.style.translate=`0 ${bob}px`;wheels.style.translate=`0 ${bob}px`;
+    wheels.querySelectorAll('.wheel-spin').forEach(wheel=>{wheel.style.rotate=`${ride*1440}deg`;});
+    const phase=waiting?'waiting':dismount>=1?'flowers':ride>=1?'dismount':'riding';
+    if(root.dataset.phase!==phase){
+      root.dataset.phase=phase;
+      $('story-caption').textContent=phase==='flowers'?'Anh xuống xe, cầm bó hoa đứng cạnh em.':phase==='riding'?'Anh đạp xe đến gặp em, chưa cầm hoa.':'';
+    }
   }
   function createSticker(sticker){
     const wrap=document.createElement('div');wrap.className='sentence-sticker';

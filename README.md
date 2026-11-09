@@ -65,3 +65,6 @@ Cảnh 1 giữ nguyên sticker-cry khi girl-black xuất hiện (preserveExistin
 
 Cảnh từ câu 5 (mốc 24 giây của file đã cắt): sticker-pink-sweater đứng cạnh girl-pink, bong bóng thoại ghi đúng Vy thíc Kình. Cảnh cap trước đó kéo dài qua hai câu để đủ thời gian tiến lại gần. Lời thoại có bản văn bản dành cho trình đọc màn hình.
 
+
+Cảnh từ câu 7: girl-green xuất hiện, chờ 2 giây rồi bạn chạy xe tới trong 6 giây. Khi dừng, phần xuống xe kéo dài 1,1 giây; chỉ sau khi tư thế ngồi đã mờ hết mới hiện sticker-bouquet cầm hoa. Xe đậu lại phía sau. Chuyển động, bánh xe và thời điểm hiện hoa dùng đồng hồ nhạc nên dừng cùng âm thanh. Giảm chuyển động sẽ hiển thị cảnh cuối ngay.
+
