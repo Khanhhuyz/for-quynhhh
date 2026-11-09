@@ -66,7 +66,7 @@ window.CARD_CONTENT = {
       { src: "assets/girl-pink-peace.png", x: 78, scale: 1.38 }
     ] },
     { fromLine: 5, actors: [
-      { src: "assets/sticker-pink-sweater.png", x: 26, scale: 1.15, speech: "Vy thíc Kình" },
+      { src: "assets/sticker-pink-sweater.png", x: 52, beside: 1, gap: 4, scale: 1.15, speech: "Vy thíc Kình" },
       { src: "assets/girl-pink.png", x: 76, scale: 1.55 }
     ] }
   ],

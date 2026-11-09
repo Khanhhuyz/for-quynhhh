@@ -55,7 +55,7 @@
         if(!existing&&storyScenes[scene].preserveExisting&&!reducedMotion.matches){
           wrap.animate([{opacity:0},{opacity:1}],{duration:320,easing:'ease-out'});
         }
-        storyActors.push({element:wrap,from:actor.x,to:actor.toX??actor.x});
+        storyActors.push({element:wrap,from:actor.x,to:actor.toX??actor.x,beside:actor.beside,gap:actor.gap??4});
         return wrap;
       });
       layer.replaceChildren(...actors);
@@ -73,7 +73,13 @@
     const duration=storyScenes[stickerScene]?.duration||1;
     const progress=reducedMotion.matches?1:Math.max(0,Math.min(1,(audio.currentTime-storyStartedAt)/duration));
     const eased=progress*progress*(3-2*progress);
-    storyActors.forEach(actor=>{actor.element.style.left=`${actor.from+(actor.to-actor.from)*eased}%`;});
+    storyActors.forEach(actor=>{
+      const partner=storyActors[actor.beside];
+      if(partner){
+        const spacing=(actor.element.offsetWidth+partner.element.offsetWidth)/2+actor.gap;
+        actor.element.style.left=`calc(${partner.from}% - ${spacing}px)`;
+      }else actor.element.style.left=`${actor.from+(actor.to-actor.from)*eased}%`;
+    });
   }
   function createSticker(sticker){
     const wrap=document.createElement('div');wrap.className='sentence-sticker';
@@ -200,6 +206,7 @@
   $('read-all').addEventListener('click',()=>{audio.pause();$('letter-dialog').showModal();});
   $('close-letter').addEventListener('click',()=>$('letter-dialog').close());
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)paint();});
+  window.addEventListener('resize',updateStickerMotion);
   window.addEventListener('pagehide',()=>{audio.pause();cancelAnimationFrame(frame);});
   paint();controls();
 })();

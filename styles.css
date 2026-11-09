@@ -61,8 +61,8 @@ body{background:#faf3ed;color:#74495c}
 .actor-doodles{position:absolute;inset:-18px -24% auto;width:148%;height:calc(100% + 36px);overflow:visible;pointer-events:none;fill:none;stroke:#c47c93;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px #fff8)}
 .doodle-float{animation:doodle-drift 2.8s ease-in-out var(--doodle-delay,0s) infinite alternate}
 @keyframes doodle-drift{from{translate:0 0;opacity:.8}to{translate:0 -4px;opacity:1}}
-.actor-speech{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%) rotate(calc(-1*var(--tilt)));width:max-content;max-width:170px;padding:10px 17px;border:1.5px solid #d49aad;border-radius:20px 20px 20px 8px;background:#fffaf8;color:#96546f;font:500 13px/1.5 var(--sans);box-shadow:0 4px 16px #a6687d12;white-space:nowrap;animation:speech-appear .45s ease-out both}
-.actor-speech::before{content:'';position:absolute;top:-7px;left:44%;width:11px;height:11px;background:#fffaf8;border-top:1.5px solid #d49aad;border-left:1.5px solid #d49aad;transform:rotate(45deg)}
+.actor-speech{position:absolute;top:-32px;left:72%;transform:rotate(calc(-1*var(--tilt)));width:max-content;max-width:170px;padding:10px 17px;border:1.5px solid #d49aad;border-radius:20px 20px 20px 8px;background:#fffaf8;color:#96546f;font:500 13px/1.5 var(--sans);box-shadow:0 4px 16px #a6687d12;white-space:nowrap;animation:speech-appear .45s ease-out both}
+.actor-speech::before{content:'';position:absolute;bottom:-7px;left:17px;width:11px;height:11px;background:#fffaf8;border-bottom:1.5px solid #d49aad;border-right:1.5px solid #d49aad;transform:rotate(45deg)}
 @keyframes speech-appear{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
-@media(max-width:760px){.actor-speech{font-size:11px;padding:8px 13px;top:calc(100% + 12px)}}
-@media(max-height:600px){.actor-speech{font-size:10px;padding:5px 10px;top:calc(100% + 8px)}}
+@media(max-width:760px){.actor-speech{font-size:11px;padding:8px 13px;top:-26px}}
+@media(max-height:600px){.actor-speech{font-size:10px;padding:5px 10px;top:-22px}}
