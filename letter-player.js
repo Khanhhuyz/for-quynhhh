@@ -10,7 +10,9 @@
   let previousAutomatic=-1, instantSentence=false;
   let typedCharacters=[], typedCount=0, typingStart=0, typingDuration=1;
   let sentenceEntrance, outgoingSentence;
-  const entries=[{text:content.greeting,at:content.greetingAt},...content.letterLines,{text:content.signoff,at:content.signoffAt},{text:content.signature,at:content.signatureAt}];
+  const entries=content.groupedLetter?content.letterLines.map((line,i)=>({...line,
+    text:(i===0?content.greeting+'\n':'')+line.text+(i===content.letterLines.length-1?' '+content.signoff:'')
+  })):[{text:content.greeting,at:content.greetingAt},...content.letterLines,{text:content.signoff,at:content.signoffAt},{text:content.signature,at:content.signatureAt}];
   let cues=timing.createCues(entries,start,end);
   let stickerScene=-1, stickerIndex=-2, stickerFade;
   let storyStartedAt=0, storyActors=[];
@@ -288,6 +290,7 @@
       transitionSentence(index);
       lastIndex=index;
       const text=entries[index]?.text||'Một giai điệu, chỉ dành cho em.';
+      $('current-sentence').classList.toggle('grouped-sentence',!!content.groupedLetter);
       const accessible=document.createElement('span');accessible.className='sr-only';accessible.textContent=text;
       const copy=document.createElement('span');copy.setAttribute('aria-hidden','true');
       typedCharacters=Array.from(text,character=>{const span=document.createElement('span');span.className='typed-character';span.textContent=character;return span;});

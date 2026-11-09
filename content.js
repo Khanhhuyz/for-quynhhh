@@ -1,6 +1,7 @@
 // Thay nội dung mẫu ở đây. Ảnh và nhạc có thể đặt trong thư mục assets/.
 window.CARD_CONTENT = {
   autoAdvance: false,
+  groupedLetter: true,
   greeting: "Gửi Quỳnhh,",
   greetingAt: 0,
   signoff: "Huy mong Quỳnh luôn được là chính mình khi ở bên Huy.",
@@ -21,37 +22,23 @@ window.CARD_CONTENT = {
     sourceOffsetSeconds: 41,
     durationSeconds: 164.52
   },
-  // Giữ lời thư của Huy, chia từng ý để đọc trên một màn hình.
+  // 12 đoạn theo từng lượt chạm; lời chào ghép vào đầu, lời kết vào cuối.
   // Đang chuyển câu bằng tay; at chỉ là mốc dự phòng nếu bật tự động lại.
   letterLines: [
-    { at: 2, text: "Có một điều mà Huy đã suy nghĩ rất nhìu" },
-    { at: 8, text: "Huy đã khom biết cách bắt đầu lá thư này như thế nào." },
-    { at: 14, text: "Rồi H nhận ra H cần phải can đảm hơn" },
-    { at: 20, text: "để bày tỏ tâm tư này cho Q." },
-    { at: 26, text: "H rất vui vì giữa bao nhiêu người, chúng mình đã gặp nhau." },
-    { at: 32, text: "Thực sự thì mình đã quen nhau một thời gian cũng chưa phải là dài" },
-    { at: 38, text: "và số lần mình gặp gỡ cũng chưa nhiều." },
-    { at: 44, text: "Nhưng quãng thời gian ở gần Q" },
-    { at: 50, text: "cho H cảm giác một ngày bình thường trở nên đáng nhớ hơn rất nhiều." },
-    { at: 56, text: "H thấy mình hợp năng lượng" },
-    { at: 62, text: "đơn giản chỉ là lúc hai đứa đi la cà cùng nhau," },
-    { at: 68, text: "dù chỉ là ăn vài món lặt vặt" },
-    { at: 74, text: "hay đi dạo loanh quanh" },
-    { at: 80, text: "và cảm giác mỗi sáng ngủ dậy" },
-    { at: 86, text: "biết mình có ai đó để nhắn tin trò chuyện," },
-    { at: 92, text: "thích mấy câu đùa vu vơ mà cả hai cùng cười." },
+    { at: 2, text: "Có một điều mà Huy đã suy nghĩ rất nhìu Huy đã khom biết cách bắt đầu lá thư này như thế nào." },
+    { at: 14, text: "Rồi H nhận ra H cần phải can đảm hơn để bày tỏ tâm tư này cho Q." },
+    { at: 26, text: "H rất vui vì giữa bao nhiêu người, chúng mình đã gặp nhau. Thực sự thì mình đã quen nhau một thời gian cũng chưa phải là dài và số lần mình gặp gỡ cũng chưa nhiều." },
+    { at: 44, text: "Nhưng quãng thời gian ở gần Q cho H cảm giác một ngày bình thường trở nên đáng nhớ hơn rất nhiều." },
+    { at: 56, text: "H thấy mình hợp năng lượng đơn giản chỉ là lúc hai đứa đi la cà cùng nhau, dù chỉ là ăn vài món lặt vặt" },
+    { at: 74, text: "hay đi dạo loanh quanh và cảm giác mỗi sáng ngủ dậy biết mình có ai đó để nhắn tin trò chuyện, thích mấy câu đùa vu vơ mà cả hai cùng cười." },
     { at: 98, text: "Từng chút một, H đã thích cả những điều nhỏ bé nhất ở Q." },
-    { at: 104, text: "Một người H muốn kể cho nghe mọi chuyện." },
-    { at: 110, text: "Một người H muốn gặp, dù ngày hôm ấy chẳng có gì đặc biệt." },
-    { at: 116, text: "Ở bên Q, H thấy mình có thêm thật nhiều điều để mong chờ." },
-    { at: 122, text: "Và H nhận ra H thật sự muốn nghiêm túc" },
-    { at: 128, text: "muốn bước vào cuộc sống của Q." },
-    { at: 134, text: "H không hứa mọi ngày đều sẽ hoàn hảo." },
-    { at: 140, text: "Nhưng H muốn học cách hiểu Q nhiều hơn." },
+    { at: 104, text: "Một người H muốn kể cho nghe mọi chuyện.\nMột người H muốn gặp, dù ngày hôm ấy chẳng có gì đặc biệt.\nỞ bên Q, H thấy mình có thêm thật nhiều điều để mong chờ." },
+    { at: 122, text: "Và H nhận ra H thật sự muốn nghiêm túc muốn bước vào cuộc sống của Q." },
+    { at: 134, text: "H không hứa mọi ngày đều sẽ hoàn hảo.\nNhưng H muốn học cách hiểu Q nhiều hơn." },
     { at: 146, text: "Lắng nghe Q, kể cả những lúc chẳng biết phải nói gì." },
     { at: 152, text: "Cùng Q đi qua ngày vui và cả những ngày chẳng dễ dàng." }
   ],
-  // Bản thử câu chuyện: mỗi cảnh đầu đi cùng một câu, rồi giữ cảnh cuối.
+  // Chỉ số từ 0: di chuyển ở đoạn 4–6, Vy thíc Kình ở đoạn 7–8.
   stickerScenes: [
     { fromLine: 0, actors: [{ src: "assets/sticker-cry.png", x: 24 }] },
     { fromLine: 1, preserveExisting: true, actors: [
@@ -66,11 +53,11 @@ window.CARD_CONTENT = {
       { src: "assets/sticker-cap.png", x: 18, toX: 52, doodles: "hearts" },
       { src: "assets/girl-pink-peace.png", x: 78, scale: 1.38 }
     ] },
-    { fromLine: 5, actors: [
+    { fromLine: 6, actors: [
       { src: "assets/sticker-pink-sweater.png", x: 52, beside: 1, gap: 4, scale: 1.15, speech: "Vy thíc Kình" },
       { src: "assets/girl-pink.png", x: 76, scale: 1.55 }
     ] },
-    { fromLine: 7, bicycle: {
+    { fromLine: 8, bicycle: {
       delay: 3, rideSeconds: 5, dismountSeconds: 1.1,
       pout: "assets/sticker-pout.png", poutAt: 1,
       rider: "assets/sticker-bike-rider.png",
@@ -79,7 +66,7 @@ window.CARD_CONTENT = {
     }, actors: [
       { src: "assets/girl-green.png", x: 77, scale: 1.2 }
     ] },
-    { fromLine: 9, stroll: true, actors: [
+    { fromLine: 10, stroll: true, actors: [
       { src: "assets/girl-glasses-cutout.png", x: 40, scale: .95 },
       { src: "assets/sticker-finger-heart.png", version: 2, x: 60, scale: 1.05 }
     ] }
