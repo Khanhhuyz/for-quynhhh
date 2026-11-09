@@ -77,3 +77,6 @@ Cảnh từ câu 7: girl-green xuất hiện, chờ 2 giây rồi bạn chạy x
 
 Cảnh từ câu 9 (53 giây): girl-glasses-cutout và sticker-finger-heart nắm tay qua hai cánh tay SVG 2D, tay nắm và cổ tay màu áo. Hai nhân vật cùng dịch chuyển qua lại, nhún nhảy; 7 trái tim nhỏ bay nhẹ xung quanh. Điểm nối tay được tính theo vị trí nhân vật từng khung hình, dùng đồng hồ nhạc nên dừng cùng âm thanh. Giảm chuyển động giữ bố cục tĩnh.
 
+
+Nắm tay đã vẽ lại: hai bàn tay riêng với hai sắc da, nét ngón tay ôm vào nhau, tay áo xanh và đen, viền trắng rõ, tim nhỏ phía trên chỗ nắm. Ảnh tải xong sẽ tính lại điểm nối tay cả khi đang tạm dừng. Sticker tim tay dùng version=2 để tải ảnh đã bỏ dấu hỏi.
+

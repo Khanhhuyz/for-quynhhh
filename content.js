@@ -80,7 +80,7 @@ window.CARD_CONTENT = {
     ] },
     { fromLine: 9, stroll: true, actors: [
       { src: "assets/girl-glasses-cutout.png", x: 40, scale: .95 },
-      { src: "assets/sticker-finger-heart.png", x: 60, scale: 1.05 }
+      { src: "assets/sticker-finger-heart.png", version: 2, x: 60, scale: 1.05 }
     ] }
   ],
   // Sticker ảnh tách nền; crop (nếu có) dùng để hiển thị một biểu cảm từ sheet.
