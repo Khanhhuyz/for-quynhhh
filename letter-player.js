@@ -92,9 +92,7 @@
   function createStroll(layer){
     const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
     svg.classList.add('stroll-doodles');svg.setAttribute('aria-hidden','true');svg.setAttribute('preserveAspectRatio','none');
-    const leftPalm='M-23 -5L-15 -5C-12 -11 -8 -12 -4 -9L7 -1C12 3 9 10 4 10L-4 8L-13 3L-23 3Z';
-    const rightPalm='M23 -5L15 -6C11 -12 6 -12 2 -9L-6 -2C-10 2 -5 7 -2 4L3 0L5 4C9 10 15 6 17 2L23 2Z';
-    svg.innerHTML='<g class="stroll-arms"><path class="arm-outline arm-left"/><path class="arm-outline arm-right"/><path class="arm-skin arm-left"/><path class="arm-skin arm-right"/><path class="sleeve-outline sleeve-left"/><path class="sleeve-outline sleeve-right"/><path class="sleeve sleeve-left" stroke="#9bb881"/><path class="sleeve sleeve-right" stroke="#49454b"/><g class="holding-hands"><g class="clasp-outline"><path d="'+leftPalm+'"/><path d="'+rightPalm+'"/></g><path class="clasp-palm" d="'+leftPalm+'" fill="#f8d0bc"/><path class="clasp-palm" d="'+rightPalm+'" fill="#edb79e"/><path class="clasp-fingers" d="M-1 2L5 6M-5 4L1 8M-9 3L-3 7M-6 -2Q-2 -7 3 -3"/></g></g><g class="stroll-hearts">'+Array.from({length:7},()=>'<path d="M0 3C-8 -6 -15 1 -11 8L0 18L11 8C15 1 8 -6 0 3Z"/>').join('')+'</g>';
+    svg.innerHTML='<g class="stroll-arms"><path class="arm-outline arm-left"/><path class="arm-outline arm-right"/><path class="arm-skin arm-left"/><path class="arm-skin arm-right"/><circle class="cuff cuff-left" r="5" fill="#b5c795"/><circle class="cuff cuff-right" r="5" fill="#555050"/><g class="holding-hands"><path d="M-8 -3Q-12 3 -6 7L1 9Q8 9 10 3Q12 -3 6 -5L0 -2Q-5 -7 -8 -3Z" fill="#f4c9b4" stroke="#fffaf5" stroke-width="2.5"/><path d="M-3 0 2 4M1 -2 5 2" stroke="#cc927f" stroke-width="1.2" fill="none" stroke-linecap="round"/></g></g><g class="stroll-hearts">'+Array.from({length:7},()=>'<path d="M0 3C-8 -6 -15 1 -11 8L0 18L11 8C15 1 8 -6 0 3Z"/>').join('')+'</g>';
     layer.append(svg);
     storyStroll={svg,hand:svg.querySelector('.holding-hands'),hearts:Array.from(svg.querySelectorAll('.stroll-hearts path'))};
   }
@@ -103,7 +101,7 @@
     const {svg,hand,hearts}=storyStroll, layer=$('sticker-layer');
     const width=layer.clientWidth, time=reducedMotion.matches?0:Math.max(0,audio.currentTime-storyStartedAt);
     const [girl,boy]=storyActors, gw=girl.element.offsetWidth, bw=boy.element.offsetWidth;
-    const separation=(gw+bw)/2+48;
+    const separation=(gw+bw)/2+22;
     const drift=reducedMotion.matches?0:Math.sin(time*.55)*Math.min(36,width*.055);
     const center=width/2+drift;
     const centers=[center-separation/2,center+separation/2];
@@ -117,21 +115,18 @@
     const gh=girl.element.querySelector('.sticker-crop').offsetHeight, bh=boy.element.querySelector('.sticker-crop').offsetHeight;
     const startLeft={x:centers[0]+gw*.34,y:gh*.68+bobs[0]};
     const startRight={x:centers[1]-bw*.34,y:bh*.68+bobs[1]};
-    const hx=(startLeft.x+startRight.x)/2, hy=Math.max(startLeft.y,startRight.y)+23;
-    const handScale=Math.max(.95,Math.min(1.3,Math.max(gw,bw)/100));
-    const lx=hx-20*handScale, rx=hx+20*handScale;
-    const paths={left:`M${startLeft.x} ${startLeft.y} C${startLeft.x+8} ${startLeft.y+16} ${lx-10} ${hy+5} ${lx} ${hy}`,right:`M${startRight.x} ${startRight.y} C${startRight.x-8} ${startRight.y+16} ${rx+10} ${hy+5} ${rx} ${hy}`};
+    const hx=(startLeft.x+startRight.x)/2, hy=Math.max(startLeft.y,startRight.y)+12;
+    const paths={left:`M${startLeft.x} ${startLeft.y} Q${startLeft.x+8} ${hy+6} ${hx} ${hy}`,right:`M${startRight.x} ${startRight.y} Q${startRight.x-8} ${hy+6} ${hx} ${hy}`};
     for(const side of ['left','right'])svg.querySelectorAll(`.arm-${side}`).forEach(path=>path.setAttribute('d',paths[side]));
-    for(const [side,point,direction] of [['left',startLeft,1],['right',startRight,-1]]){
-      const sleeve=`M${point.x} ${point.y} Q${point.x+direction*5} ${point.y+7} ${point.x+direction*7} ${point.y+12}`;
-      svg.querySelectorAll(`.sleeve-${side}`).forEach(path=>path.setAttribute('d',sleeve));
+    for(const [side,point] of [['left',startLeft],['right',startRight]]){
+      const cuff=svg.querySelector(`.cuff-${side}`);cuff.setAttribute('cx',point.x);cuff.setAttribute('cy',point.y);
     }
-    hand.setAttribute('transform',`translate(${hx} ${hy}) rotate(${reducedMotion.matches?0:Math.sin(time*3.5)*3}) scale(${handScale})`);
+    hand.setAttribute('transform',`translate(${hx} ${hy}) rotate(${reducedMotion.matches?0:Math.sin(time*3.5)*6})`);
     const spread=Math.max(gw,bw);
     hearts.forEach((heart,i)=>{
       const anchors=[[-1.25,20],[1.2,22],[-1.3,105],[1.3,112],[-.5,4],[.45,0],[0,145]];
       const [x,y]=anchors[i], float=reducedMotion.matches?0:Math.sin(time*1.8+i)*4;
-      heart.setAttribute('transform',`translate(${i===6?hx:center+x*spread} ${i===6?hy-24+float:y*(spread/100)+float}) rotate(${i%2?13:-12}) scale(${i%3===0?.45:.32})`);
+      heart.setAttribute('transform',`translate(${center+x*spread} ${y*(spread/100)+float}) rotate(${i%2?13:-12}) scale(${i%3===0?.45:.32})`);
       heart.style.opacity=String(.55+(reducedMotion.matches?0:(Math.sin(time*1.8+i)+1)*.18));
     });
   }

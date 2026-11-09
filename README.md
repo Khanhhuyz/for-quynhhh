@@ -80,3 +80,6 @@ Cảnh từ câu 9 (53 giây): girl-glasses-cutout và sticker-finger-heart nắ
 
 Nắm tay đã vẽ lại: hai bàn tay riêng với hai sắc da, nét ngón tay ôm vào nhau, tay áo xanh và đen, viền trắng rõ, tim nhỏ phía trên chỗ nắm. Ảnh tải xong sẽ tính lại điểm nối tay cả khi đang tạm dừng. Sticker tim tay dùng version=2 để tải ảnh đã bỏ dấu hỏi.
 
+
+Cảnh nắm tay hiện đã quay về nét vẽ đơn giản ban đầu: hai cánh tay cong, tay nắm nhỏ ở giữa và cổ tay tròn. Vẫn giữ hiệu ứng tung tăng, tim nhỏ, ảnh tim tay đã bỏ dấu hỏi và việc tính lại vị trí khi ảnh tải xong.
+
