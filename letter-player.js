@@ -223,7 +223,7 @@
   }
   function setQuestion(show){
     $('question').hidden=!show;$('line-stage').hidden=show;
-    $('chapter-badge').textContent=show?'MỘT CÂU HỎI':'LỜI THƯƠNG';
+    $('chapter-badge').textContent=show?'MỘT CÂU HỎI':'from my heart';
   }
   function transitionSentence(index){
     const sentence=$('current-sentence');
