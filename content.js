@@ -77,6 +77,10 @@ window.CARD_CONTENT = {
       bouquet: "assets/sticker-bouquet.png"
     }, actors: [
       { src: "assets/girl-green.png", x: 77, scale: 1.2 }
+    ] },
+    { fromLine: 9, stroll: true, actors: [
+      { src: "assets/girl-glasses-cutout.png", x: 40, scale: .95 },
+      { src: "assets/sticker-finger-heart.png", x: 60, scale: 1.05 }
     ] }
   ],
   // Sticker ảnh tách nền; crop (nếu có) dùng để hiển thị một biểu cảm từ sheet.
@@ -86,8 +90,8 @@ window.CARD_CONTENT = {
     { src: "assets/girl-pink-peace.png" },
     { src: "assets/sticker-bouquet.png" },
     { src: "assets/sticker-pout.png" },
-    { src: "assets/sticker-finger-heart.png", enabled: false },
-    { src: "assets/girl-glasses-cutout.png", enabled: false },
+    { src: "assets/sticker-finger-heart.png" },
+    { src: "assets/girl-glasses-cutout.png" },
     { src: "assets/love-sticker.png", enabled: false },
     { src: "assets/girl-black.png" },
     { src: "assets/sticker-cry.png" },

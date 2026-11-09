@@ -74,3 +74,6 @@ Cảnh từ câu 7: girl-green xuất hiện, chờ 2 giây rồi bạn chạy x
 
 Điều hướng mới: chạm nửa trái vùng nội dung để lùi một câu; nửa phải để tiến một câu. Laptop dùng ArrowLeft/ArrowRight; Enter/Space vẫn tiến khi vùng chữ được chọn. Có thể lùi từ câu hỏi cuối, không lùi vượt lời chào. Nút nhạc, Lá thư và nút trả lời giữ chức năng riêng. Nhạc không bị tua khi chuyển câu. Khi nhạc đang dừng, câu vừa chọn hiện đầy đủ để đọc.
 
+
+Cảnh từ câu 9 (53 giây): girl-glasses-cutout và sticker-finger-heart nắm tay qua hai cánh tay SVG 2D, tay nắm và cổ tay màu áo. Hai nhân vật cùng dịch chuyển qua lại, nhún nhảy; 7 trái tim nhỏ bay nhẹ xung quanh. Điểm nối tay được tính theo vị trí nhân vật từng khung hình, dùng đồng hồ nhạc nên dừng cùng âm thanh. Giảm chuyển động giữ bố cục tĩnh.
+

@@ -74,3 +74,12 @@ body{background:#faf3ed;color:#74495c}
 .bicycle-wheels{position:absolute;inset:0;width:100%;height:auto;fill:none;stroke:#63584c;stroke-width:3;stroke-opacity:.35;pointer-events:none}
 .wheel-spin{transform-box:fill-box;transform-origin:center}
 @media(max-height:600px){.bicycle-arrival{width:150px}}
+.stroll-doodles{position:absolute;inset:0 auto auto 0;width:100%;height:260px;overflow:visible;pointer-events:none;z-index:3}
+.stroll-arms path{stroke-linecap:round;stroke-linejoin:round}
+.stroll-arms .arm-outline,.stroll-arms .arm-skin{fill:none}
+.stroll-arms .arm-outline{stroke:#fffaf5;stroke-width:10}
+.stroll-arms .arm-skin{stroke:#f4c9b4;stroke-width:6}
+.stroll-arms .cuff{stroke:#fffaf5;stroke-width:2}
+.stroll-hearts path{fill:#f2c3d0;stroke:#c78299;stroke-width:1.8;stroke-linejoin:round}
+.sticker-layer[data-stroll=true] .story-actor{width:calc(clamp(90px,12vw,140px)*var(--actor-scale,1))}
+@media(max-height:600px){.sticker-layer[data-stroll=true] .story-actor{width:calc(75px*var(--actor-scale,1))}}
