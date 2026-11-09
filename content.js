@@ -69,6 +69,7 @@ window.CARD_CONTENT = {
   // Sticker ảnh tách nền; crop (nếu có) dùng để hiển thị một biểu cảm từ sheet.
   stickers: [
     // Ảnh mới đã sẵn sàng; chờ sắp xếp vào các cảnh tiếp theo.
+    { src: "assets/sticker-pink-sweater.png", enabled: false },
     { src: "assets/girl-pink-peace.png" },
     { src: "assets/sticker-bouquet.png", enabled: false },
     { src: "assets/sticker-pout.png", enabled: false },
