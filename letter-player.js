@@ -4,6 +4,9 @@
   const content=window.CARD_CONTENT, song=content.music, timing=window.LetterTiming;
   const autoAdvance=content.autoAdvance!==false;
   const audio=$('background-music'), reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+  const transportIcon=document.createElement('span');
+  transportIcon.className='transport-icon';transportIcon.setAttribute('aria-hidden','true');
+  $('play-letter').replaceChildren(transportIcon);
   const start=song.startSeconds||0, offset=song.sourceOffsetSeconds||0;
   let end=song.durationSeconds, opened=false, started=false, finished=false;
   let loading=false, failed=false, frame, lastIndex=-2, manualFloor=-1;
@@ -242,7 +245,8 @@
   function status(message,error=false){$('player-status').textContent=message;$('song-panel').classList.toggle('has-error',error);}
   function controls(message,error=false){
     const playing=!audio.paused&&!audio.ended&&!failed;
-    $('play-letter').textContent=playing?'Ⅱ':finished?'↺':'▷';
+    transportIcon.textContent=playing?'♥':finished?'↺':'▷';
+    $('play-letter').classList.toggle('is-playing',playing);
     $('play-letter').setAttribute('aria-label',playing?'Tạm dừng nhạc và tâm thư':finished?'Nghe và đọc lại từ đầu':'Phát nhạc và tâm thư');
     $('play-letter').setAttribute('aria-pressed',String(playing));
     $('song-panel').classList.toggle('loading',loading);
