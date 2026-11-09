@@ -6,6 +6,7 @@
   const start=song.startSeconds||0, offset=song.sourceOffsetSeconds||0;
   let end=song.durationSeconds, opened=false, started=false, finished=false;
   let loading=false, failed=false, frame, lastIndex=-2, manualFloor=-1;
+  let previousAutomatic=-1, instantSentence=false;
   let typedCharacters=[], typedCount=0, typingStart=0, typingDuration=1;
   let sentenceEntrance, outgoingSentence;
   const entries=[{text:content.greeting,at:content.greetingAt},...content.letterLines,{text:content.signoff,at:content.signoffAt},{text:content.signature,at:content.signatureAt}];
@@ -201,7 +202,15 @@
   function paint(){
     const time=audio.currentTime||start;
     const state=timing.snapshot(cues,time,start,end);
-    const index=started?Math.max(state.visible-1,manualFloor):-1;
+    const automatic=state.visible-1;
+    if(manualFloor>=0){
+      if(manualFloor<previousAutomatic&&automatic>previousAutomatic){
+        manualFloor=Math.min(entries.length-1,manualFloor+automatic-previousAutomatic);
+      }
+      if(manualFloor===automatic)manualFloor=-1;
+    }
+    previousAutomatic=automatic;
+    const index=started?(manualFloor>=0?manualFloor:automatic):-1;
     if(index!==lastIndex){
       transitionSentence(index);
       lastIndex=index;
@@ -211,10 +220,11 @@
       typedCharacters=Array.from(text,character=>{const span=document.createElement('span');span.className='typed-character';span.textContent=character;return span;});
       copy.append(...typedCharacters);$('current-sentence').replaceChildren(accessible,copy);
       typedCount=0;typingStart=time;
+      instantSentence=audio.paused||audio.ended;
       const nextCue=cues.find(cue=>cue.time>time)?.time??end;
       typingDuration=Math.max(.15,Math.min(3.6,typedCharacters.length*.045,(nextCue-time)*.72));
     }
-    const count=reducedMotion.matches||index<0?typedCharacters.length:Math.min(typedCharacters.length,Math.floor(Math.max(0,time-typingStart)/typingDuration*typedCharacters.length)+1);
+    const count=reducedMotion.matches||index<0||instantSentence?typedCharacters.length:Math.min(typedCharacters.length,Math.floor(Math.max(0,time-typingStart)/typingDuration*typedCharacters.length)+1);
     // Hidden characters keep their place so the sentence does not jump as it is typed.
     if(count<typedCount)typedCharacters.slice(count,typedCount).forEach(span=>span.classList.remove('is-visible'));
     if(count>typedCount)typedCharacters.slice(typedCount,count).forEach(span=>span.classList.add('is-visible'));
@@ -225,12 +235,15 @@
   }
   function animate(){paint();if(!audio.paused&&!audio.ended)frame=requestAnimationFrame(animate);}
   function open(){if(opened)return;opened=true;$('envelope').hidden=true;$('letter-paper').hidden=false;$('song-panel').hidden=false;}
-  function reset(){finished=false;started=false;lastIndex=-2;manualFloor=-1;audio.currentTime=start;paint();}
-  function nextSentence(){
-    if(!opened||finished)return;
+  function reset(){finished=false;started=false;lastIndex=-2;manualFloor=-1;previousAutomatic=-1;audio.currentTime=start;paint();}
+  function moveSentence(direction){
+    if(!opened||(finished&&direction>0))return;
+    const current=finished?entries.length:Math.max(0,lastIndex);
+    const target=Math.max(0,Math.min(entries.length,current+direction));
+    if(target===current)return;
     started=true;
-    manualFloor=Math.max(lastIndex,manualFloor)+1;
-    if(manualFloor>=entries.length)finished=true;
+    manualFloor=target;finished=target>=entries.length;
+    previousAutomatic=timing.snapshot(cues,audio.currentTime||start,start,end).visible-1;
     paint();controls();
   }
   async function toggle(){
@@ -252,8 +265,15 @@
   $('unseal-letter').addEventListener('click',toggle);
   $('play-letter').addEventListener('click',toggle);
   $('restart-letter').addEventListener('click',()=>{audio.pause();reset();toggle();});
-  $('main').addEventListener('click',event=>{if(!event.target.closest('button,a,input,dialog'))nextSentence();});
-  $('line-stage').addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();nextSentence();}});
+  $('main').addEventListener('click',event=>{
+    if(event.target.closest('button,a,input,dialog'))return;
+    moveSentence(event.detail!==0&&event.clientX<window.innerWidth/2?-1:1);
+  });
+  $('line-stage').addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();moveSentence(1);}});
+  document.addEventListener('keydown',event=>{
+    if(!opened||event.altKey||event.ctrlKey||event.metaKey||$('letter-dialog').open||event.target.closest('input,textarea,select,[contenteditable=true]'))return;
+    if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();moveSentence(event.key==='ArrowLeft'?-1:1);}
+  });
   $('read-all').addEventListener('click',()=>{audio.pause();$('letter-dialog').showModal();});
   $('close-letter').addEventListener('click',()=>$('letter-dialog').close());
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)paint();});

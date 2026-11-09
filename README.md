@@ -71,3 +71,6 @@ Cảnh từ câu 7: girl-green xuất hiện, chờ 2 giây rồi bạn chạy x
 
 Đã chèn sticker-pout vào trước xe đạp: girl-green chờ riêng 1 giây, pout xuất hiện trong khoảng giây 1–3 rồi mờ đi; sau đó xe đi vào trong 5 giây, xuống xe và mới hiện bó hoa. Pout không xuất hiện đồng thời với người đang chạy xe.
 
+
+Điều hướng mới: chạm nửa trái vùng nội dung để lùi một câu; nửa phải để tiến một câu. Laptop dùng ArrowLeft/ArrowRight; Enter/Space vẫn tiến khi vùng chữ được chọn. Có thể lùi từ câu hỏi cuối, không lùi vượt lời chào. Nút nhạc, Lá thư và nút trả lời giữ chức năng riêng. Nhạc không bị tua khi chuyển câu. Khi nhạc đang dừng, câu vừa chọn hiện đầy đủ để đọc.
+
