@@ -70,6 +70,7 @@ body{background:#faf3ed;color:#74495c}
 .bicycle-rider{display:block;width:100%;height:auto}
 .bicycle-parked{position:absolute;left:0;top:var(--parked-top,40px);width:80%;height:auto;opacity:0}
 .bicycle-bouquet{position:absolute;top:0;left:var(--bouquet-left,70px);width:44%;height:auto;opacity:0;z-index:2}
+.bicycle-pout{position:absolute;top:0;width:44%;height:auto;opacity:0}
 .bicycle-wheels{position:absolute;inset:0;width:100%;height:auto;fill:none;stroke:#63584c;stroke-width:3;stroke-opacity:.35;pointer-events:none}
 .wheel-spin{transform-box:fill-box;transform-origin:center}
 @media(max-height:600px){.bicycle-arrival{width:150px}}

@@ -70,7 +70,8 @@ window.CARD_CONTENT = {
       { src: "assets/girl-pink.png", x: 76, scale: 1.55 }
     ] },
     { fromLine: 7, bicycle: {
-      delay: 2, rideSeconds: 6, dismountSeconds: 1.1,
+      delay: 3, rideSeconds: 5, dismountSeconds: 1.1,
+      pout: "assets/sticker-pout.png", poutAt: 1,
       rider: "assets/sticker-bike-rider.png",
       parked: "assets/bicycle-parked.svg",
       bouquet: "assets/sticker-bouquet.png"
@@ -84,7 +85,7 @@ window.CARD_CONTENT = {
     { src: "assets/sticker-pink-sweater.png" },
     { src: "assets/girl-pink-peace.png" },
     { src: "assets/sticker-bouquet.png" },
-    { src: "assets/sticker-pout.png", enabled: false },
+    { src: "assets/sticker-pout.png" },
     { src: "assets/sticker-finger-heart.png", enabled: false },
     { src: "assets/girl-glasses-cutout.png", enabled: false },
     { src: "assets/love-sticker.png", enabled: false },

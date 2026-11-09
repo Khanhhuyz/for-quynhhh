@@ -68,3 +68,6 @@ Cảnh từ câu 5 (mốc 24 giây của file đã cắt): sticker-pink-sweater 
 
 Cảnh từ câu 7: girl-green xuất hiện, chờ 2 giây rồi bạn chạy xe tới trong 6 giây. Khi dừng, phần xuống xe kéo dài 1,1 giây; chỉ sau khi tư thế ngồi đã mờ hết mới hiện sticker-bouquet cầm hoa. Xe đậu lại phía sau. Chuyển động, bánh xe và thời điểm hiện hoa dùng đồng hồ nhạc nên dừng cùng âm thanh. Giảm chuyển động sẽ hiển thị cảnh cuối ngay.
 
+
+Đã chèn sticker-pout vào trước xe đạp: girl-green chờ riêng 1 giây, pout xuất hiện trong khoảng giây 1–3 rồi mờ đi; sau đó xe đi vào trong 5 giây, xuống xe và mới hiện bó hoa. Pout không xuất hiện đồng thời với người đang chạy xe.
+
